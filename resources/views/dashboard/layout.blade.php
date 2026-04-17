@@ -637,26 +637,47 @@
             <div class="sb-section">
                 <div class="sb-section-label">Konten</div>
                 <nav class="sb-nav">
-                    <a class="sb-link {{ request()->is('dashboard/berita*') ? 'active' : '' }}"
+                    <a class="sb-link {{ request()->is('dashboard/berita') ? 'active' : '' }}"
                        href="{{ route('dashboard.posts.index', 'berita') }}">
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
                             <path d="M4 5h16M4 10h10M4 15h12M4 20h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         </svg>
-                        Berita IT
+                        Daftar Berita
                     </a>
-                    <a class="sb-link {{ request()->is('dashboard/tutorial*') ? 'active' : '' }}"
+                    <a class="sb-link {{ request()->is('dashboard/berita/create') || request()->is('dashboard/berita/*/edit') ? 'active' : '' }}"
+                       href="{{ route('dashboard.posts.create', 'berita') }}">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Posting Berita
+                    </a>
+                    <a class="sb-link {{ request()->is('dashboard/tutorial') ? 'active' : '' }}"
                        href="{{ route('dashboard.posts.index', 'tutorial') }}">
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
                             <path d="M8 4h12v16H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Zm0 0v16M12 8h4M12 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         </svg>
-                        Tutorial & Panduan
+                        Daftar Panduan
                     </a>
-                    <a class="sb-link {{ request()->is('dashboard/jualan*') ? 'active' : '' }}"
+                    <a class="sb-link {{ request()->is('dashboard/tutorial/create') || request()->is('dashboard/tutorial/*/edit') ? 'active' : '' }}"
+                       href="{{ route('dashboard.posts.create', 'tutorial') }}">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Posting Panduan
+                    </a>
+                    <a class="sb-link {{ request()->is('dashboard/jualan') ? 'active' : '' }}"
                        href="{{ route('dashboard.posts.index', 'jualan') }}">
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
                             <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4ZM3 6h18M16 10a4 4 0 0 1-8 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        Toko & Jualan
+                        Daftar Jualan
+                    </a>
+                    <a class="sb-link {{ request()->is('dashboard/jualan/create') || request()->is('dashboard/jualan/*/edit') ? 'active' : '' }}"
+                       href="{{ route('dashboard.posts.create', 'jualan') }}">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Posting Jualan
                     </a>
                 </nav>
             </div>

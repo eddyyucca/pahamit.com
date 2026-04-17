@@ -22,8 +22,9 @@
                     <p>Tulis judul yang jelas dan deskriptif untuk SEO yang lebih baik.</p>
                 </div>
                 @if ($post->exists)
-                    <a class="btn btn-soft btn-sm" href="{{ route('dashboard.posts.index', $type) }}">+ Tulis Baru</a>
+                    <a class="btn btn-soft btn-sm" href="{{ route('dashboard.posts.create', $type) }}">+ Tulis Baru</a>
                 @endif
+                <a class="btn btn-soft btn-sm" href="{{ route('dashboard.posts.index', $type) }}">Daftar {{ $label }}</a>
             </div>
             <div class="field full">
                 <label for="title">Judul {{ $label }}</label>
@@ -246,6 +247,7 @@ sudo apt-get update
     </aside>
 </form>
 
+@isset($items)
 {{-- ── Post list ────────────────────────────────────────────── --}}
 <section class="card panel" style="margin-top:20px;">
     <div class="panel-head">
@@ -334,6 +336,7 @@ sudo apt-get update
     </div>
     @endif
 </section>
+@endisset
 
 @endsection
 

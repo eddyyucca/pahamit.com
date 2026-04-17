@@ -822,5 +822,6 @@
         }, { threshold: 0.08 });
         revEls.forEach(el => rObs.observe(el));
     </script>
+    @include('site.partials.adroll')
 </body>
 </html>

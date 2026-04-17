@@ -700,5 +700,6 @@
         headings.forEach(h => obs.observe(h));
     })();
 </script>
+@include('site.partials.adroll')
 </body>
 </html>

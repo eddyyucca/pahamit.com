@@ -42,10 +42,20 @@ class MediaPostController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('dashboard.manage', [
+        return view('dashboard.list', [
             ...self::TYPES[$type],
             'type' => $type,
             'items' => $items,
+        ]);
+    }
+
+    public function create(string $type): View
+    {
+        abort_unless(isset(self::TYPES[$type]), 404);
+
+        return view('dashboard.manage', [
+            ...self::TYPES[$type],
+            'type' => $type,
             'post' => new MediaPost(['type' => $type, 'status' => 'draft']),
             'formAction' => route('dashboard.posts.store', $type),
             'method' => 'POST',
@@ -72,12 +82,9 @@ class MediaPostController extends Controller
     {
         abort_unless(isset(self::TYPES[$type]) && $post->type === $type, 404);
 
-        $items = MediaPost::type($type)->latest()->paginate(10);
-
         return view('dashboard.manage', [
             ...self::TYPES[$type],
             'type' => $type,
-            'items' => $items,
             'post' => $post,
             'formAction' => route('dashboard.posts.update', [$type, $post]),
             'method' => 'PUT',

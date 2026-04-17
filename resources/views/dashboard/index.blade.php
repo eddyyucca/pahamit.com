@@ -117,7 +117,7 @@
                 <h2>Top Berita</h2>
                 <p>Berita paling banyak dibaca berdasarkan view unik.</p>
             </div>
-            <a class="btn btn-soft btn-sm" href="{{ route('dashboard.posts.index', 'berita') }}">Kelola</a>
+            <a class="btn btn-soft btn-sm" href="{{ route('dashboard.posts.index', 'berita') }}">Daftar</a>
         </div>
         <div class="top-list">
             @forelse ($topPosts as $item)
@@ -147,9 +147,9 @@
                 </div>
             </div>
             <div class="qa-list">
-                <a class="qa-item" href="{{ route('dashboard.posts.index', 'berita') }}"><div class="qa-icon" style="background:var(--brand-soft);color:var(--brand);">+</div>Tulis Berita Baru</a>
-                <a class="qa-item" href="{{ route('dashboard.posts.index', 'tutorial') }}"><div class="qa-icon" style="background:var(--green-soft);color:var(--green);">+</div>Buat Tutorial Baru</a>
-                <a class="qa-item" href="{{ route('dashboard.posts.index', 'jualan') }}"><div class="qa-icon" style="background:rgba(245,158,11,.12);color:var(--amber);">+</div>Tambah Produk / Jasa</a>
+                <a class="qa-item" href="{{ route('dashboard.posts.create', 'berita') }}"><div class="qa-icon" style="background:var(--brand-soft);color:var(--brand);">+</div>Tulis Berita Baru</a>
+                <a class="qa-item" href="{{ route('dashboard.posts.create', 'tutorial') }}"><div class="qa-icon" style="background:var(--green-soft);color:var(--green);">+</div>Buat Tutorial Baru</a>
+                <a class="qa-item" href="{{ route('dashboard.posts.create', 'jualan') }}"><div class="qa-icon" style="background:rgba(245,158,11,.12);color:var(--amber);">+</div>Tambah Produk / Jasa</a>
             </div>
         </div>
 

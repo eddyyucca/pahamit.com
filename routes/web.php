@@ -35,6 +35,9 @@ Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(functi
     Route::get('/{type}', [MediaPostController::class, 'index'])
         ->whereIn('type', ['berita', 'tutorial', 'jualan'])
         ->name('posts.index');
+    Route::get('/{type}/create', [MediaPostController::class, 'create'])
+        ->whereIn('type', ['berita', 'tutorial', 'jualan'])
+        ->name('posts.create');
     Route::post('/{type}', [MediaPostController::class, 'store'])
         ->whereIn('type', ['berita', 'tutorial', 'jualan'])
         ->name('posts.store');
