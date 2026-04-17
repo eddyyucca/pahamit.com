@@ -2,19 +2,26 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AiAgentController;
+use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MediaPostController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SeoController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('track.site.visit')->group(function () {
     Route::get('/', HomeController::class)->name('home');
+    Route::get('/kategori/{category}', [ArchiveController::class, 'category'])->name('archive.category');
+    Route::get('/tag/{tag}', [ArchiveController::class, 'tag'])->name('archive.tag');
 
     Route::get('/berita/{slug}',  [PostController::class, 'show'])->name('post.berita');
     Route::get('/panduan/{slug}', [PostController::class, 'show'])->name('post.panduan');
     Route::get('/toko/{slug}',    [PostController::class, 'show'])->name('post.toko');
 });
+
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('seo.sitemap');
+Route::get('/robots.txt', [SeoController::class, 'robots'])->name('seo.robots');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'login'])->name('login');

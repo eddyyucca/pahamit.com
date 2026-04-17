@@ -563,6 +563,73 @@
         .footer-contact-item svg { flex-shrink: 0; margin-top: 1px; color: #4a9eff; }
         .footer-contact-item a { color: #4a9eff; font-weight: 700; }
         .footer-contact-item a:hover { text-decoration: underline; }
+        .footer-partners {
+            margin-top: 42px;
+            padding: 24px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 8px;
+            background: rgba(255,255,255,.035);
+        }
+        .footer-partners-head {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 18px;
+            margin-bottom: 18px;
+        }
+        .footer-partners-head .footer-col-title { margin-bottom: 7px; }
+        .footer-partners-head span {
+            display: block;
+            color: #4d6a83;
+            font-size: .82rem;
+            line-height: 1.55;
+        }
+        .footer-partners-head a {
+            flex-shrink: 0;
+            color: #4a9eff;
+            font-size: .78rem;
+            font-weight: 900;
+        }
+        .footer-partner-list {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+        .footer-partner-card {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,.08);
+            background: rgba(3,13,30,.45);
+        }
+        .footer-partner-mark {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(11,111,238,.24), rgba(56,189,248,.12));
+            border: 1px solid rgba(74,158,255,.24);
+            color: #9ed0ff;
+            font-size: .72rem;
+            font-weight: 950;
+        }
+        .footer-partner-card strong {
+            display: block;
+            color: #cbd5e1;
+            font-size: .82rem;
+            margin-bottom: 2px;
+        }
+        .footer-partner-card small {
+            display: block;
+            color: #4d6a83;
+            font-size: .72rem;
+            line-height: 1.45;
+        }
         .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.07); margin: 0; }
         .footer-bottom {
             padding: 20px 0;
@@ -591,6 +658,7 @@
             .hero-inner { gap: 36px; padding: 72px 0 64px; }
             .hero-photos { width: 340px; grid-template-rows: 168px 124px; }
             .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+            .footer-partner-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         @media (max-width: 640px) {
             .hero-inner { padding: 56px 0 48px; flex-direction: column; gap: 40px; }
@@ -605,6 +673,10 @@
             .service-right { padding: 24px 24px 30px; }
             .cta { padding: 26px 22px; }
             .footer-inner { grid-template-columns: 1fr; gap: 28px; }
+            .footer-partners { padding: 18px; }
+            .footer-partners-head { display: block; }
+            .footer-partners-head a { display: inline-flex; margin-top: 10px; }
+            .footer-partner-list { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
             .footer-bottom-links { justify-content: center; flex-wrap: wrap; }
         }
@@ -962,6 +1034,7 @@
                         </div>
                     </div>
                 </div>
+                @include('site.partials.footer-partners')
             </div>
             <hr class="footer-divider">
             <div class="footer-bottom">

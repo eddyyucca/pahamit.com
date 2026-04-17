@@ -615,6 +615,81 @@
             display: flex; align-items: center; justify-content: space-between;
             gap: 16px; font-size: .8rem; color: var(--text3);
         }
+        .footer-col-title {
+            margin: 0;
+            font-size: .72rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--text);
+        }
+        .footer-partners {
+            width: min(1240px, calc(100% - 40px));
+            margin: 0 auto 22px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--bg);
+        }
+        .footer-partners-head {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+        .footer-partners-head span {
+            display: block;
+            margin-top: 6px;
+            color: var(--text3);
+            font-size: .78rem;
+        }
+        .footer-partners-head a {
+            flex-shrink: 0;
+            color: var(--brand);
+            font-size: .78rem;
+            font-weight: 900;
+        }
+        .footer-partner-list {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+        .footer-partner-card {
+            min-width: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--surface);
+        }
+        .footer-partner-mark {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            background: color-mix(in srgb, var(--brand) 13%, transparent);
+            border: 1px solid color-mix(in srgb, var(--brand) 24%, var(--border));
+            color: var(--brand);
+            font-size: .72rem;
+            font-weight: 950;
+        }
+        .footer-partner-card strong {
+            display: block;
+            color: var(--text);
+            font-size: .82rem;
+            margin-bottom: 2px;
+        }
+        .footer-partner-card small {
+            display: block;
+            color: var(--text3);
+            font-size: .72rem;
+            line-height: 1.45;
+        }
 
         /* ══════════════════════════════
            RESPONSIVE
@@ -649,6 +724,10 @@
             .code-block-wrap pre { padding: 14px; }
             .share-row { flex-direction: column; align-items: flex-start; }
             .footer-inner { flex-direction: column; gap: 6px; text-align: center; }
+            .footer-partners { width: calc(100% - 28px); padding: 16px; }
+            .footer-partners-head { display: block; }
+            .footer-partners-head a { display: inline-flex; margin-top: 10px; }
+            .footer-partner-list { grid-template-columns: 1fr; }
             #backTop { bottom: 18px; right: 14px; width: 38px; height: 38px; }
             .related-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
         }
@@ -948,6 +1027,7 @@
 @endif
 
 <footer class="footer">
+    @include('site.partials.footer-partners')
     <div class="footer-inner">
         <div>
             © {{ date('Y') }} <strong style="color:var(--text);">pahamIT</strong> · pahamit.com<br>

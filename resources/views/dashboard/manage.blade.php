@@ -194,6 +194,14 @@ sudo apt-get update
                 <strong id="seoPreviewTitle">{{ old('seo_title', $post->seo_title) ?: old('title', $post->title) ?: 'Judul artikel akan tampil di sini' }}</strong>
                 <p id="seoPreviewDesc">{{ old('seo_description', $post->seo_description) ?: old('excerpt', $post->excerpt) ?: 'Meta description atau ringkasan artikel akan tampil di sini.' }}</p>
             </div>
+            <div class="seo-checklist" id="seoChecklist">
+                <div data-check="title"><span></span> SEO title ideal</div>
+                <div data-check="description"><span></span> Meta description ideal</div>
+                <div data-check="keyword"><span></span> Focus keyword terisi</div>
+                <div data-check="tags"><span></span> Minimal satu tag</div>
+                <div data-check="image"><span></span> Featured image tersedia</div>
+                <div data-check="content"><span></span> Konten cukup panjang</div>
+            </div>
         </section>
 
     </div>
@@ -579,6 +587,7 @@ const seoDescCount = document.getElementById('seoDescCount');
 const seoPreviewTitle = document.getElementById('seoPreviewTitle');
 const seoPreviewDesc = document.getElementById('seoPreviewDesc');
 const seoScoreBadge = document.getElementById('seoScoreBadge');
+const hasFeaturedImage = @json((bool) $post->featured_image_url);
 
 function updateSeoPreview() {
     const title = (seoTitleInput.value || titleInput.value || 'Judul artikel akan tampil di sini').trim();
@@ -588,18 +597,28 @@ function updateSeoPreview() {
     seoPreviewTitle.textContent = title;
     seoPreviewDesc.textContent = desc;
 
-    let score = 0;
-    if (title.length >= 35 && title.length <= 65) score++;
-    if (desc.length >= 120 && desc.length <= 170) score++;
-    if (document.getElementById('focus_keyword').value.trim()) score++;
-    if (document.getElementById('tags').value.trim()) score++;
+    const checks = {
+        title: title.length >= 35 && title.length <= 65,
+        description: desc.length >= 120 && desc.length <= 170,
+        keyword: document.getElementById('focus_keyword').value.trim().length > 0,
+        tags: document.getElementById('tags').value.trim().length > 0,
+        image: hasFeaturedImage || (document.getElementById('featured_image').files?.length > 0) || document.getElementById('image_url').value.trim().length > 0,
+        content: contentBox.value.trim().split(/\s+/).filter(Boolean).length >= 300,
+    };
+    const score = Object.values(checks).filter(Boolean).length;
 
-    seoScoreBadge.textContent = score >= 3 ? 'SEO Baik' : (score >= 2 ? 'SEO Cukup' : 'Perlu SEO');
-    seoScoreBadge.className = 'badge ' + (score >= 3 ? 'green' : (score >= 2 ? 'amber' : 'rose'));
+    seoScoreBadge.textContent = score >= 5 ? 'SEO Baik' : (score >= 3 ? 'SEO Cukup' : 'Perlu SEO');
+    seoScoreBadge.className = 'badge ' + (score >= 5 ? 'green' : (score >= 3 ? 'amber' : 'rose'));
+
+    Object.entries(checks).forEach(([name, passed]) => {
+        const item = document.querySelector(`[data-check="${name}"]`);
+        item?.classList.toggle('ok', passed);
+    });
 }
 
-[titleInput, excerptInput, seoTitleInput, seoDescInput, document.getElementById('focus_keyword'), document.getElementById('tags')]
+[titleInput, excerptInput, seoTitleInput, seoDescInput, document.getElementById('focus_keyword'), document.getElementById('tags'), contentBox, document.getElementById('image_url'), document.getElementById('featured_image')]
     .forEach(el => el?.addEventListener('input', updateSeoPreview));
+document.getElementById('featured_image')?.addEventListener('change', updateSeoPreview);
 updateSeoPreview();
 </script>
 
@@ -667,8 +686,44 @@ updateSeoPreview();
     line-height: 1.55;
     margin: 0;
 }
+.seo-checklist {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 16px;
+}
+.seo-checklist div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 9px;
+    background: var(--surface2);
+    color: var(--text2);
+    font-size: .82rem;
+    font-weight: 700;
+}
+.seo-checklist span {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid var(--text3);
+    flex-shrink: 0;
+}
+.seo-checklist .ok {
+    color: #065F46;
+    background: var(--green-soft);
+}
+.seo-checklist .ok span {
+    border-color: var(--green);
+    background: var(--green);
+    box-shadow: inset 0 0 0 3px var(--green-soft);
+}
 @media (max-width: 640px) {
     .seo-grid {
+        grid-template-columns: 1fr;
+    }
+    .seo-checklist {
         grid-template-columns: 1fr;
     }
 }
