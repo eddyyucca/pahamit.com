@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AiAgentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MediaPostController;
@@ -28,6 +29,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->n
 
 Route::middleware('auth')->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::get('/ai-agent', [AiAgentController::class, 'index'])->name('ai.index');
+    Route::post('/ai-agent', [AiAgentController::class, 'storeConversation'])->name('ai.store');
+    Route::get('/ai-agent/{conversation}', [AiAgentController::class, 'index'])->name('ai.show');
+    Route::put('/ai-agent/{conversation}', [AiAgentController::class, 'updateConversation'])->name('ai.update');
+    Route::post('/ai-agent/{conversation}/message', [AiAgentController::class, 'message'])->name('ai.message');
+    Route::post('/ai-agent/{conversation}/drafts/{draft}/save', [AiAgentController::class, 'saveDraft'])->name('ai.drafts.save');
     // Preview (draft-safe)
     Route::get('/{type}/{post}/preview', [PostController::class, 'preview'])
         ->whereIn('type', ['berita', 'tutorial', 'jualan'])

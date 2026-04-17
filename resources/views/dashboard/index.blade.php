@@ -150,6 +150,7 @@
                 <a class="qa-item" href="{{ route('dashboard.posts.create', 'berita') }}"><div class="qa-icon" style="background:var(--brand-soft);color:var(--brand);">+</div>Tulis Berita Baru</a>
                 <a class="qa-item" href="{{ route('dashboard.posts.create', 'tutorial') }}"><div class="qa-icon" style="background:var(--green-soft);color:var(--green);">+</div>Buat Tutorial Baru</a>
                 <a class="qa-item" href="{{ route('dashboard.posts.create', 'jualan') }}"><div class="qa-icon" style="background:rgba(245,158,11,.12);color:var(--amber);">+</div>Tambah Produk / Jasa</a>
+                <a class="qa-item" href="{{ route('dashboard.ai.index') }}"><div class="qa-icon" style="background:var(--rose-soft);color:var(--rose);">AI</div>Diskusi Dengan AI Agent</a>
             </div>
         </div>
 

@@ -560,39 +560,267 @@
         .pagination .active { background: var(--brand); border-color: var(--brand); color: #fff; }
 
         /* ── Editor shell ────────────────────────────────────── */
-        .editor-shell { display: grid; grid-template-columns: 1fr 320px; gap: 16px; align-items: start; }
-        .editor-main, .editor-side { display: grid; gap: 16px; }
+        .editor-shell {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        .editor-main, .editor-side { display: grid; gap: 22px; }
+        .editor-side {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            align-items: start;
+        }
+        .editor-shell .panel { padding: 26px; }
+        .editor-shell .panel-head {
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+        .editor-shell .field { gap: 9px; }
+        .editor-shell .field input,
+        .editor-shell .field select {
+            min-height: 46px;
+            padding-left: 14px;
+            padding-right: 14px;
+        }
+        .editor-shell .field textarea {
+            padding: 14px 16px;
+            line-height: 1.75;
+        }
+        .editor-shell .editor-title {
+            min-height: 60px !important;
+            padding-left: 18px;
+            padding-right: 18px;
+        }
+        .editor-shell .editor-toolbar {
+            padding: 13px 14px;
+            gap: 8px;
+        }
+        .editor-shell .editor-textarea {
+            min-height: 560px !important;
+            padding: 18px 20px !important;
+            font-size: .96rem;
+            line-height: 1.85;
+        }
+        .editor-shell #previewPane {
+            height: 560px !important;
+            padding: 24px 28px !important;
+        }
+        .editor-side { position: static; }
 
         /* ── Responsive ──────────────────────────────────────── */
         @media (max-width: 1100px) {
             :root { --sidebar-w: 240px; }
         }
         @media (max-width: 991px) {
+            html, body { overflow-x: hidden; }
+            .shell { display: block; min-width: 0; }
             .sidebar { transform: translateX(-100%); }
             .sidebar.open { transform: translateX(0); }
-            .main-wrap { margin-left: 0; }
+            .main-wrap { width: 100%; margin-left: 0; min-width: 0; }
             .hamburger { display: grid; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
             .grid-2 { grid-template-columns: 1fr; }
             .editor-shell { grid-template-columns: 1fr; }
+            .editor-side { position: static; }
+            .topbar {
+                min-height: var(--topbar-h);
+                height: auto;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                align-items: flex-start;
+            }
+            .topbar-left { min-width: 0; flex: 1; }
+            .topbar-title,
+            .topbar-sub {
+                max-width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .topbar-right { flex-shrink: 0; }
+            .panel-head { align-items: stretch; }
+            .chart-wrap { min-width: 0; }
         }
         @media (max-width: 640px) {
-            .page-content { padding: 16px; }
-            .topbar { padding: 0 16px; }
+            :root {
+                --radius: 10px;
+                --topbar-h: 58px;
+            }
+            .sidebar { width: min(86vw, 300px); }
+            .page-content { padding: 14px; }
+            .topbar {
+                gap: 10px;
+                padding: 10px 14px;
+            }
+            .topbar-left { gap: 10px; }
+            .topbar-title { font-size: .92rem; }
+            .topbar-sub { display: none; }
+            .theme-btn,
+            .notif-btn,
+            .hamburger {
+                width: 36px;
+                height: 36px;
+            }
+            .topbar-right .tb-btn {
+                width: 36px;
+                height: 36px;
+                padding: 0;
+                justify-content: center;
+            }
+            .topbar-right .tb-btn svg { display: block; }
+            .topbar-right .tb-btn:not(.primary) {
+                font-size: 0;
+                gap: 0;
+            }
+            .topbar-right form .tb-btn.primary {
+                width: auto;
+                padding: 0 10px;
+                font-size: .76rem;
+            }
             .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .stat-card { padding: 15px; }
+            .stat-icon {
+                width: 36px;
+                height: 36px;
+            }
+            .stat-label { font-size: .72rem; }
             .stat-value { font-size: 1.6rem; }
-            .panel { padding: 16px; }
+            .stat-trend { font-size: .68rem; }
+            .panel { padding: 15px; }
+            .editor-shell {
+                gap: 16px;
+                max-width: none;
+            }
+            .editor-main,
+            .editor-side {
+                gap: 16px;
+            }
+            .editor-side {
+                grid-template-columns: 1fr;
+            }
+            .editor-shell .panel {
+                padding: 18px;
+            }
+            .editor-shell .panel-head {
+                gap: 12px;
+                margin-bottom: 16px;
+            }
+            .panel-head {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 12px;
+                margin-bottom: 16px;
+            }
+            .panel-head > div,
+            .panel-head form,
+            .panel-head .field,
+            .panel-head input,
+            .panel-head .btn {
+                width: 100%;
+                min-width: 0 !important;
+            }
+            .panel-head > div[style*="display:flex"] {
+                display: grid !important;
+                grid-template-columns: 1fr;
+                gap: 10px !important;
+                align-items: stretch !important;
+            }
+            .panel-head .field[style*="flex-direction:row"] {
+                display: grid !important;
+                grid-template-columns: 1fr auto;
+                gap: 8px !important;
+            }
+            .btn {
+                min-height: 38px;
+                justify-content: center;
+            }
+            .table-wrap {
+                width: calc(100vw - 58px);
+                margin-left: -1px;
+                padding-bottom: 6px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .table {
+                min-width: 720px;
+            }
+            .top-item {
+                align-items: flex-start;
+                flex-wrap: wrap;
+            }
+            .top-views {
+                margin-left: 40px;
+            }
+            .qa-item {
+                min-height: 54px;
+            }
+            .editor-title {
+                min-height: 48px !important;
+                font-size: 1rem !important;
+            }
+            .editor-toolbar {
+                max-width: 100%;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                scrollbar-width: thin;
+                -webkit-overflow-scrolling: touch;
+            }
+            .editor-toolbar .tool-btn {
+                flex: 0 0 auto;
+            }
+            .editor-textarea {
+                min-height: 420px !important;
+                font-size: .92rem;
+                padding: 15px !important;
+            }
             #editorWrap { flex-direction: column; }
+            #editorWrap textarea {
+                width: 100% !important;
+                border-radius: 0 0 10px 10px !important;
+            }
             #previewPane {
                 border-left: 1px solid var(--border) !important;
                 border-top: none !important;
                 border-radius: 0 0 10px 10px !important;
                 height: 360px !important;
+                width: 100% !important;
+                padding: 16px !important;
+            }
+            .image-preview { min-height: 140px; }
+            .pagination a,
+            .pagination span {
+                min-width: 32px;
+                min-height: 32px;
+                font-size: .78rem;
             }
         }
         @media (max-width: 479px) {
             .stats-grid { grid-template-columns: 1fr; }
             .topbar-right .tb-btn:not(.primary) { display: none; }
+            .page-content { padding: 12px; }
+            .card { border-radius: 10px; }
+            .panel { padding: 13px; }
+            .editor-shell .panel {
+                padding: 15px;
+            }
+            .editor-shell .editor-textarea {
+                min-height: 380px !important;
+            }
+            .topbar-right { gap: 6px; }
+            .notif-btn { display: none; }
+            .stat-card { min-height: 118px; }
+            .table-wrap { width: calc(100vw - 50px); }
+            .tool-tab {
+                width: auto;
+                min-width: max-content;
+            }
+            .top-views {
+                margin-left: 0;
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -629,6 +857,13 @@
                             <rect x="14" y="14" width="7" height="7" rx="2" stroke="currentColor" stroke-width="2"/>
                         </svg>
                         Overview
+                    </a>
+                    <a class="sb-link {{ request()->routeIs('dashboard.ai.*') ? 'active' : '' }}"
+                       href="{{ route('dashboard.ai.index') }}">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 3v3M6.5 5.5l2 2M21 12h-3M17.5 5.5l-2 2M12 18v3M4 12H1M7.5 16.5l-2 2M16.5 16.5l2 2M8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        AI Agent
                     </a>
                 </nav>
             </div>

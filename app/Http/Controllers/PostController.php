@@ -40,7 +40,13 @@ class PostController extends Controller
             ->take(4)
             ->get();
 
-        return view('site.show', compact('post', 'related'));
+        $view = match ($post->type) {
+            MediaPost::TYPE_TUTORIAL => 'site.panduan.show',
+            MediaPost::TYPE_JUALAN   => 'site.jualan.show',
+            default                  => 'site.show',
+        };
+
+        return view($view, compact('post', 'related'));
     }
 
     public function preview(string $type, MediaPost $post): View
@@ -49,7 +55,13 @@ class PostController extends Controller
 
         $related = collect();
 
-        return view('site.show', compact('post', 'related'));
+        $view = match ($post->type) {
+            MediaPost::TYPE_TUTORIAL => 'site.panduan.show',
+            MediaPost::TYPE_JUALAN   => 'site.jualan.show',
+            default                  => 'site.show',
+        };
+
+        return view($view, compact('post', 'related'));
     }
 
     private function recordView(Request $request, MediaPost $post): void

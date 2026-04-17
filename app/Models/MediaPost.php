@@ -25,6 +25,11 @@ class MediaPost extends Model
         'slug',
         'category',
         'excerpt',
+        'seo_title',
+        'seo_description',
+        'focus_keyword',
+        'tags',
+        'canonical_url',
         'content',
         'price',
         'status',
@@ -38,6 +43,7 @@ class MediaPost extends Model
     {
         return [
             'published_at' => 'datetime',
+            'tags' => 'array',
         ];
     }
 

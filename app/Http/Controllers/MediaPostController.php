@@ -67,6 +67,7 @@ class MediaPostController extends Controller
         abort_unless(isset(self::TYPES[$type]), 404);
 
         $data = $this->validated($request, $type);
+        $data = $this->normalizeStructuredFields($data);
         $data = $this->withUploadedImage($request, $data);
         $data['user_id'] = Auth::id();
         $data['type'] = $type;
@@ -96,6 +97,7 @@ class MediaPostController extends Controller
         abort_unless(isset(self::TYPES[$type]) && $post->type === $type, 404);
 
         $data = $this->validated($request, $type);
+        $data = $this->normalizeStructuredFields($data);
         $data = $this->withUploadedImage($request, $data, $post);
         $data['slug'] = MediaPost::uniqueSlug($data['title'], $post->id);
         $data['published_at'] = $data['status'] === 'published'
@@ -126,12 +128,29 @@ class MediaPostController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'category' => ['nullable', 'string', 'max:120'],
             'excerpt' => ['nullable', 'string', 'max:500'],
+            'seo_title' => ['nullable', 'string', 'max:255'],
+            'seo_description' => ['nullable', 'string', 'max:500'],
+            'focus_keyword' => ['nullable', 'string', 'max:120'],
+            'tags' => ['nullable', 'string', 'max:500'],
+            'canonical_url' => ['nullable', 'url', 'max:255'],
             'content' => ['nullable', 'string'],
             'price' => [$type === MediaPost::TYPE_JUALAN ? 'nullable' : 'exclude', 'nullable', 'numeric', 'min:0'],
             'status' => ['required', Rule::in(['draft', 'review', 'published'])],
             'image_url' => ['nullable', 'url', 'max:255'],
             'featured_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
+    }
+
+    private function normalizeStructuredFields(array $data): array
+    {
+        $data['tags'] = collect(explode(',', (string) ($data['tags'] ?? '')))
+            ->map(fn ($tag) => trim($tag))
+            ->filter()
+            ->unique(fn ($tag) => mb_strtolower($tag))
+            ->values()
+            ->all();
+
+        return $data;
     }
 
     private function withUploadedImage(Request $request, array $data, ?MediaPost $post = null): array

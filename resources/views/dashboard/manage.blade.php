@@ -38,9 +38,9 @@
 
         {{-- Content editor --}}
         <section class="card panel">
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;">
+            <div class="editor-section-bar">
                 <label for="content" style="font-size:.78rem;font-weight:700;color:var(--text2);">Isi Konten</label>
-                <div style="display:flex;gap:6px;">
+                <div class="editor-mode-actions">
                     <button type="button" id="btnEditorOnly" class="tool-btn tool-tab active" title="Mode Editor">✏️ Editor</button>
                     <button type="button" id="btnSplitView" class="tool-btn tool-tab" title="Editor + Preview">⬌ Split</button>
                     @if ($post->exists)
@@ -149,6 +149,50 @@ sudo apt-get update
                 <textarea id="excerpt" name="excerpt" style="min-height:90px;"
                           placeholder="Ringkasan singkat (150–200 karakter) yang tampil di kartu berita dan hasil pencarian.">{{ old('excerpt', $post->excerpt) }}</textarea>
                 @error('excerpt') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+        </section>
+
+        <section class="card panel seo-panel">
+            <div class="panel-head">
+                <div>
+                    <h2>SEO & Distribusi</h2>
+                    <p>Optimalkan tampilan artikel di Google dan media sosial.</p>
+                </div>
+                <span class="badge blue" id="seoScoreBadge">SEO Check</span>
+            </div>
+            <div class="seo-grid">
+                <div class="field full">
+                    <label for="seo_title">SEO Title</label>
+                    <input id="seo_title" name="seo_title" type="text" value="{{ old('seo_title', $post->seo_title) }}" placeholder="Judul untuk hasil pencarian Google">
+                    <small class="seo-hint"><span id="seoTitleCount">0</span>/60 karakter ideal</small>
+                    @error('seo_title') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="field full">
+                    <label for="seo_description">Meta Description</label>
+                    <textarea id="seo_description" name="seo_description" style="min-height:88px;" placeholder="Ringkasan 140-160 karakter untuk hasil pencarian.">{{ old('seo_description', $post->seo_description) }}</textarea>
+                    <small class="seo-hint"><span id="seoDescCount">0</span>/160 karakter ideal</small>
+                    @error('seo_description') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="field">
+                    <label for="focus_keyword">Focus Keyword</label>
+                    <input id="focus_keyword" name="focus_keyword" type="text" value="{{ old('focus_keyword', $post->focus_keyword) }}" placeholder="Cth: subnetting dasar">
+                    @error('focus_keyword') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="field">
+                    <label for="tags">Tags</label>
+                    <input id="tags" name="tags" type="text" value="{{ old('tags', implode(', ', $post->tags ?? [])) }}" placeholder="MikroTik, jaringan, server">
+                    @error('tags') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="field full">
+                    <label for="canonical_url">Canonical URL</label>
+                    <input id="canonical_url" name="canonical_url" type="url" value="{{ old('canonical_url', $post->canonical_url) }}" placeholder="Opsional, isi jika artikel bersumber dari URL utama lain">
+                    @error('canonical_url') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+            </div>
+            <div class="seo-preview">
+                <span>{{ parse_url(config('app.url'), PHP_URL_HOST) ?: 'pahamit.com' }}</span>
+                <strong id="seoPreviewTitle">{{ old('seo_title', $post->seo_title) ?: old('title', $post->title) ?: 'Judul artikel akan tampil di sini' }}</strong>
+                <p id="seoPreviewDesc">{{ old('seo_description', $post->seo_description) ?: old('excerpt', $post->excerpt) ?: 'Meta description atau ringkasan artikel akan tampil di sini.' }}</p>
             </div>
         </section>
 
@@ -524,10 +568,109 @@ imgInput.addEventListener('change', () => {
     reader.onload = e => { imgPreview.innerHTML = `<img src="${e.target.result}" alt="Preview">`; };
     reader.readAsDataURL(file);
 });
+
+// SEO preview
+const titleInput = document.getElementById('title');
+const excerptInput = document.getElementById('excerpt');
+const seoTitleInput = document.getElementById('seo_title');
+const seoDescInput = document.getElementById('seo_description');
+const seoTitleCount = document.getElementById('seoTitleCount');
+const seoDescCount = document.getElementById('seoDescCount');
+const seoPreviewTitle = document.getElementById('seoPreviewTitle');
+const seoPreviewDesc = document.getElementById('seoPreviewDesc');
+const seoScoreBadge = document.getElementById('seoScoreBadge');
+
+function updateSeoPreview() {
+    const title = (seoTitleInput.value || titleInput.value || 'Judul artikel akan tampil di sini').trim();
+    const desc = (seoDescInput.value || excerptInput.value || 'Meta description atau ringkasan artikel akan tampil di sini.').trim();
+    seoTitleCount.textContent = title.length;
+    seoDescCount.textContent = desc.length;
+    seoPreviewTitle.textContent = title;
+    seoPreviewDesc.textContent = desc;
+
+    let score = 0;
+    if (title.length >= 35 && title.length <= 65) score++;
+    if (desc.length >= 120 && desc.length <= 170) score++;
+    if (document.getElementById('focus_keyword').value.trim()) score++;
+    if (document.getElementById('tags').value.trim()) score++;
+
+    seoScoreBadge.textContent = score >= 3 ? 'SEO Baik' : (score >= 2 ? 'SEO Cukup' : 'Perlu SEO');
+    seoScoreBadge.className = 'badge ' + (score >= 3 ? 'green' : (score >= 2 ? 'amber' : 'rose'));
+}
+
+[titleInput, excerptInput, seoTitleInput, seoDescInput, document.getElementById('focus_keyword'), document.getElementById('tags')]
+    .forEach(el => el?.addEventListener('input', updateSeoPreview));
+updateSeoPreview();
 </script>
 
 <style>
 .tool-tab { font-size:.73rem; }
 .tool-tab.active { background: var(--brand-soft); color: var(--brand); border-color: rgba(79,70,229,.3); }
+.editor-section-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+}
+.editor-mode-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+@media (max-width: 640px) {
+    .editor-section-bar {
+        display: grid;
+        gap: 10px;
+    }
+    .editor-mode-actions {
+        justify-content: flex-start;
+    }
+}
+.seo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+.seo-grid .full {
+    grid-column: 1 / -1;
+}
+.seo-hint {
+    color: var(--text3);
+    font-size: .74rem;
+    font-weight: 700;
+}
+.seo-preview {
+    margin-top: 18px;
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface2);
+}
+.seo-preview span {
+    display: block;
+    color: var(--green);
+    font-size: .78rem;
+    margin-bottom: 5px;
+}
+.seo-preview strong {
+    display: block;
+    color: var(--brand);
+    font-size: 1.05rem;
+    line-height: 1.35;
+    margin-bottom: 6px;
+}
+.seo-preview p {
+    color: var(--text2);
+    font-size: .86rem;
+    line-height: 1.55;
+    margin: 0;
+}
+@media (max-width: 640px) {
+    .seo-grid {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 @endpush

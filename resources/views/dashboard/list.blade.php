@@ -36,6 +36,7 @@
                     <th>Judul</th>
                     <th>Kategori</th>
                     <th>Status</th>
+                    <th>SEO</th>
                     @if ($type === 'jualan') <th>Harga</th> @endif
                     <th>Views</th>
                     <th>Diperbarui</th>
@@ -50,6 +51,11 @@
                     <td>
                         <span class="badge {{ $item->status === 'published' ? 'green' : ($item->status === 'review' ? 'amber' : 'rose') }}">
                             {{ ucfirst($item->status) }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="badge {{ $item->seo_title && $item->seo_description ? 'green' : 'amber' }}">
+                            {{ $item->seo_title && $item->seo_description ? 'Siap' : 'Belum' }}
                         </span>
                     </td>
                     @if ($type === 'jualan')
@@ -82,7 +88,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="{{ $type === 'jualan' ? 7 : 6 }}"
+                    <td colspan="{{ $type === 'jualan' ? 8 : 7 }}"
                         style="text-align:center;padding:42px;color:var(--text3);">
                         Belum ada data {{ strtolower($label) }}.
                         <a href="{{ route('dashboard.posts.create', $type) }}" style="color:var(--brand);font-weight:700;">Posting sekarang -></a>
