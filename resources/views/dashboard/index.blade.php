@@ -1,4 +1,4 @@
-@extends('dashboard.layout', [
+﻿@extends('dashboard.layout', [
     'title' => 'Overview Dashboard',
     'description' => 'Ringkasan performa Pahamit: pengunjung, post view, top berita, dan aktivitas terbaru.',
 ])
@@ -128,7 +128,7 @@
                     <div class="rank-badge {{ $rankClass }}">{{ $loop->iteration }}</div>
                     <div style="min-width:0;flex:1;">
                         <div class="top-title">{{ Str::limit($item->title, 55) }}</div>
-                        <div class="top-meta">{{ $item->category ?? 'Tanpa kategori' }} · {{ number_format($item->views_7d) }} view 7 hari</div>
+                        <div class="top-meta">{{ $item->category ?? 'Tanpa kategori' }} - {{ number_format($item->views_7d) }} view 7 hari</div>
                     </div>
                     <div class="top-views">{{ number_format($item->views_count) }} total</div>
                 </div>

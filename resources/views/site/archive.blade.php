@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id" data-theme="light">
 <head>
     <meta charset="utf-8">
@@ -80,7 +80,7 @@
                             <span class="badge">{{ $item->category ?: ucfirst($item->type) }}</span>
                         </div>
                         <div class="body">
-                            <div class="meta">{{ optional($item->published_at)->format('d M Y') }} · {{ number_format($item->views_count) }} views</div>
+                            <div class="meta">{{ optional($item->published_at)->format('d M Y') }} - {{ number_format($item->views_count) }} views</div>
                             <h2>{{ $item->title }}</h2>
                             <p>{{ Str::limit($item->excerpt ?: 'Baca selengkapnya di Pahamit.', 110) }}</p>
                         </div>

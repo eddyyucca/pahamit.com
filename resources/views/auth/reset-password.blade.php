@@ -1,4 +1,4 @@
-@extends('auth.layout', ['title' => 'Reset Password'])
+﻿@extends('auth.layout', ['title' => 'Reset Password'])
 
 @section('content')
     <h1>Reset Password</h1>

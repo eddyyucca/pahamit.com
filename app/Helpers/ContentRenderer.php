@@ -8,21 +8,21 @@ class ContentRenderer
      * Convert our simple markdown+shortcode format to safe HTML.
      *
      * Supported syntax:
-     *   ## Heading 2          → <h2>
-     *   ### Heading 3         → <h3>
-     *   #### Heading 4        → <h4>
-     *   **text**              → <strong>
-     *   *text*                → <em>
-     *   `inline code`         → <code>
-     *   [text](url)           → <a>
-     *   > blockquote          → <blockquote>
-     *   - list item           → <ul><li>
-     *   1. list item          → <ol><li>
-     *   ---                   → <hr>
-     *   ```lang\ncode\n```    → code block with copy button
-     *   [img: URL | caption]  → <figure><img><figcaption>
-     *   [iklan]               → ad slot placeholder
-     *   [iklan: leaderboard]  → ad slot with type label
+     *   ## Heading 2          -> <h2>
+     *   ### Heading 3         -> <h3>
+     *   #### Heading 4        -> <h4>
+     *   **text**              -> <strong>
+     *   *text*                -> <em>
+     *   `inline code`         -> <code>
+     *   [text](url)           -> <a>
+     *   > blockquote          -> <blockquote>
+     *   - list item           -> <ul><li>
+     *   1. list item          -> <ol><li>
+     *   ---                   -> <hr>
+     *   ```lang\ncode\n```    -> code block with copy button
+     *   [img: URL | caption]  -> <figure><img><figcaption>
+     *   [iklan]               -> ad slot placeholder
+     *   [iklan: leaderboard]  -> ad slot with type label
      */
     public static function render(string $raw): string
     {
@@ -83,7 +83,7 @@ class ContentRenderer
             $para = trim($para);
             if ($para === '') continue;
 
-            // Already replaced placeholders – pass through
+            // Already replaced placeholders - pass through
             if (preg_match('/^%%(CODE|IMG|AD)_\d+%%$/', $para)) {
                 $html .= $para . "\n";
                 continue;
@@ -98,7 +98,7 @@ class ContentRenderer
             // Headings
             if (preg_match('/^(#{1,4})\s+(.+)$/', $para, $hm)) {
                 $level = strlen($hm[1]);
-                $level = max(2, min(4, $level)); // clamp h2–h4
+                $level = max(2, min(4, $level)); // clamp h2-h4
                 $id    = 'heading-' . substr(md5($hm[2]), 0, 6);
                 $inner = self::inlineMarkdown($hm[2]);
                 $html .= "<h{$level} id=\"{$id}\">{$inner}</h{$level}>\n";
@@ -137,7 +137,7 @@ class ContentRenderer
                 continue;
             }
 
-            // Regular paragraph – join single newlines with <br> only when >1 line
+            // Regular paragraph - join single newlines with <br> only when >1 line
             $lines  = explode("\n", $para);
             $joined = implode("\n", array_map('trim', $lines));
             $inner  = self::inlineMarkdown($joined);
@@ -154,7 +154,7 @@ class ContentRenderer
         return $html;
     }
 
-    // ── Inline markdown ──────────────────────────────────────
+    // â”€â”€ Inline markdown â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private static function inlineMarkdown(string $text): string
     {
         // escape HTML first (but not & which might already be escaped)
@@ -189,7 +189,7 @@ class ContentRenderer
         return $text;
     }
 
-    // ── Code block HTML ──────────────────────────────────────
+    // â”€â”€ Code block HTML â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private static function codeBlock(string $lang, string $escapedCode): string
     {
         $label = strtoupper($lang);
@@ -207,7 +207,7 @@ class ContentRenderer
 HTML;
     }
 
-    // ── Image block HTML ─────────────────────────────────────
+    // â”€â”€ Image block HTML â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private static function imageBlock(string $url, string $caption): string
     {
         $cap = $caption
@@ -216,20 +216,20 @@ HTML;
         return "<figure class=\"content-image\"><img src=\"{$url}\" alt=\"{$caption}\" loading=\"lazy\">{$cap}</figure>";
     }
 
-    // ── Ad slot HTML ─────────────────────────────────────────
+    // â”€â”€ Ad slot HTML â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     private static function adSlot(string $type): string
     {
         $sizes = [
-            'leaderboard' => '728×90',
-            'rectangle'   => '300×250',
-            'banner'      => '468×60',
+            'leaderboard' => '728x90',
+            'rectangle'   => '300x250',
+            'banner'      => '468x60',
         ];
-        $size  = $sizes[$type] ?? '468×60';
+        $size  = $sizes[$type] ?? '468x60';
         $label = ucfirst($type);
         return <<<HTML
 <div class="ad-slot">
-  <strong>Iklan — {$label}</strong>
-  Slot {$size} · Hubungi kami untuk pasang iklan di sini.
+  <strong>Iklan - {$label}</strong>
+  Slot {$size} - Hubungi kami untuk pasang iklan di sini.
 </div>
 HTML;
     }

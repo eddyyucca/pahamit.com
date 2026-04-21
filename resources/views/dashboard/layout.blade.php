@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id" data-theme="light">
 <head>
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
     <style>
-        /* ── Tokens ──────────────────────────────────────────── */
+        /* â”€â”€ Tokens â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         :root {
             --brand:        #4F46E5;
             --brand-h:      #4338CA;
@@ -64,7 +64,7 @@
             --shadow-md:    0 4px 6px rgba(0,0,0,.3), 0 12px 36px rgba(0,0,0,.35);
         }
 
-        /* ── Reset ───────────────────────────────────────────── */
+        /* â”€â”€ Reset â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { font-size: 16px; height: 100%; }
         body {
@@ -78,13 +78,13 @@
         button, input, select, textarea { font: inherit; }
         img, svg { display: block; }
 
-        /* ── Shell ───────────────────────────────────────────── */
+        /* â”€â”€ Shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .shell {
             display: flex;
             min-height: 100vh;
         }
 
-        /* ── Sidebar ─────────────────────────────────────────── */
+        /* â”€â”€ Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .sidebar {
             position: fixed; top: 0; left: 0; bottom: 0;
             width: var(--sidebar-w);
@@ -180,7 +180,7 @@
         .sb-uname { font-size: .83rem; font-weight: 700; color: #E2E8F0; }
         .sb-urole { font-size: .72rem; color: var(--sidebar-text); margin-top: 2px; }
 
-        /* ── Sidebar overlay (mobile) ────────────────────────── */
+        /* â”€â”€ Sidebar overlay (mobile) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .sidebar-overlay {
             display: none;
             position: fixed; inset: 0; z-index: 39;
@@ -189,7 +189,7 @@
         }
         .sidebar-overlay.show { display: block; }
 
-        /* ── Main area ───────────────────────────────────────── */
+        /* â”€â”€ Main area â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .main-wrap {
             flex: 1; min-width: 0;
             margin-left: var(--sidebar-w);
@@ -197,7 +197,7 @@
             transition: margin-left .28s cubic-bezier(.4,0,.2,1);
         }
 
-        /* ── Topbar ──────────────────────────────────────────── */
+        /* â”€â”€ Topbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .topbar {
             position: sticky; top: 0; z-index: 30;
             height: var(--topbar-h);
@@ -279,13 +279,13 @@
             border: 1.5px solid var(--surface);
         }
 
-        /* ── Page content ────────────────────────────────────── */
+        /* â”€â”€ Page content â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .page-content {
             flex: 1;
             padding: 28px;
         }
 
-        /* ── Flash ───────────────────────────────────────────── */
+        /* â”€â”€ Flash â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .flash {
             display: flex; align-items: center; gap: 10px;
             padding: 12px 16px; border-radius: 10px;
@@ -295,7 +295,7 @@
             border: 1px solid #A7F3D0;
         }
 
-        /* ── Cards / Panels ──────────────────────────────────── */
+        /* â”€â”€ Cards / Panels â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -313,7 +313,7 @@
         }
         .panel-head p { font-size: .83rem; color: var(--text2); margin-top: 3px; }
 
-        /* ── Stat cards ──────────────────────────────────────── */
+        /* â”€â”€ Stat cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -358,17 +358,17 @@
         .stat-trend.down { color: var(--rose); }
         .stat-trend.flat { color: var(--text3); }
 
-        /* ── Grid helpers ────────────────────────────────────── */
+        /* â”€â”€ Grid helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .grid-2 { display: grid; gap: 16px; grid-template-columns: 1.4fr 1fr; }
         .grid-auto { display: grid; gap: 16px; }
 
-        /* ── Chart containers ────────────────────────────────── */
+        /* â”€â”€ Chart containers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .chart-wrap {
             position: relative; width: 100%;
         }
         .chart-wrap canvas { width: 100% !important; }
 
-        /* ── Top list ────────────────────────────────────────── */
+        /* â”€â”€ Top list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .top-list { display: grid; gap: 10px; }
         .top-item {
             display: flex; align-items: center; gap: 12px;
@@ -398,7 +398,7 @@
             padding: 3px 9px; border-radius: 6px;
         }
 
-        /* ── Badge ───────────────────────────────────────────── */
+        /* â”€â”€ Badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .badge {
             display: inline-flex; align-items: center;
             padding: 3px 9px; border-radius: 6px;
@@ -410,7 +410,7 @@
         .badge.amber  { background: rgba(245,158,11,.12); color: #92400E; }
         .badge.gray   { background: var(--surface2); color: var(--text2); }
 
-        /* ── Table ───────────────────────────────────────────── */
+        /* â”€â”€ Table â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .table-wrap { overflow-x: auto; }
         .table {
             width: 100%; border-collapse: collapse; min-width: 620px;
@@ -434,7 +434,7 @@
         .table .title-cell { font-weight: 700; max-width: 280px; }
         .table .muted { color: var(--text2); }
 
-        /* ── Quick actions ───────────────────────────────────── */
+        /* â”€â”€ Quick actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .qa-list { display: grid; gap: 10px; }
         .qa-item {
             display: flex; align-items: center; gap: 12px;
@@ -452,7 +452,7 @@
             display: grid; place-items: center; flex-shrink: 0;
         }
 
-        /* ── Form elements ───────────────────────────────────── */
+        /* â”€â”€ Form elements â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .field { display: grid; gap: 6px; }
         .field.full { grid-column: 1/-1; }
         .field label {
@@ -477,7 +477,7 @@
         }
         .text-danger { color: var(--rose); font-size: .8rem; }
 
-        /* ── Editor ──────────────────────────────────────────── */
+        /* â”€â”€ Editor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .editor-title {
             min-height: 54px !important;
             font-size: 1.2rem !important; font-weight: 800 !important;
@@ -521,7 +521,7 @@
         .image-preview:hover { border-color: var(--brand); }
         .image-preview img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* ── Btn ─────────────────────────────────────────────── */
+        /* â”€â”€ Btn â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .btn {
             display: inline-flex; align-items: center; gap: 7px;
             min-height: 40px; padding: 0 16px;
@@ -543,7 +543,7 @@
         /* inline form */
         .inline-form { display: inline; }
 
-        /* ── Pagination ──────────────────────────────────────── */
+        /* â”€â”€ Pagination â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .pagination {
             display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px;
         }
@@ -559,7 +559,7 @@
         .pagination a:hover { background: var(--brand-soft); border-color: var(--brand); color: var(--brand); }
         .pagination .active { background: var(--brand); border-color: var(--brand); color: #fff; }
 
-        /* ── Editor shell ────────────────────────────────────── */
+        /* â”€â”€ Editor shell â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         .editor-shell {
             display: grid;
             grid-template-columns: minmax(0, 1fr);
@@ -610,7 +610,7 @@
         }
         .editor-side { position: static; }
 
-        /* ── Responsive ──────────────────────────────────────── */
+        /* â”€â”€ Responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
         @media (max-width: 1100px) {
             :root { --sidebar-w: 240px; }
         }
@@ -827,7 +827,7 @@
 <body>
 <div class="shell">
 
-    <!-- ── SIDEBAR ───────────────────────────────────────────── -->
+    <!-- â”€â”€ SIDEBAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <aside class="sidebar" id="sidebar" aria-label="Navigasi Admin">
         <div class="sidebar-inner">
 
@@ -900,6 +900,13 @@
                         </svg>
                         Posting Panduan
                     </a>
+                    <a class="sb-link {{ request()->is('dashboard/series*') ? 'active' : '' }}"
+                       href="{{ route('dashboard.series.index') }}">
+                        <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 6h16M4 10h16M4 14h10M4 18h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Seri Panduan
+                    </a>
                     <a class="sb-link {{ request()->is('dashboard/jualan') ? 'active' : '' }}"
                        href="{{ route('dashboard.posts.index', 'jualan') }}">
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
@@ -954,7 +961,7 @@
     <!-- overlay mobile -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- ── MAIN ──────────────────────────────────────────────── -->
+    <!-- â”€â”€ MAIN â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
     <div class="main-wrap" id="mainWrap">
 
         <!-- topbar -->
@@ -1013,7 +1020,7 @@
 </div>
 
 <script>
-    // ── Dark / Light ─────────────────────────────────────────
+    // â”€â”€ Dark / Light â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const html = document.documentElement;
     const themeBtn = document.getElementById('themeToggle');
     const savedTheme = localStorage.getItem('pahamit-admin-theme');
@@ -1028,7 +1035,7 @@
         localStorage.setItem('pahamit-admin-theme', next);
     });
 
-    // ── Sidebar toggle ───────────────────────────────────────
+    // â”€â”€ Sidebar toggle â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const sidebar  = document.getElementById('sidebar');
     const overlay  = document.getElementById('sidebarOverlay');
     const hamburger = document.getElementById('hamburger');

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id" data-theme="light">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="pahamIT — Portal berita IT, panduan belajar, dan toko alat & jasa IT terpercaya. Bukan Sekadar Belajar.">
+    <meta name="description" content="pahamIT - Portal berita IT, panduan belajar, dan toko alat & jasa IT terpercaya. Bukan Sekadar Belajar.">
     <title>pahamIT | Bukan Sekadar Belajar.</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700,800&display=swap" rel="stylesheet">
@@ -60,7 +60,7 @@
 
         .wrap { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
 
-        /* ── Nav ── */
+        /* â”€â”€ Nav â”€â”€ */
         .topbar {
             position: sticky; top: 0; z-index: 50;
             background: rgba(255,255,255,.92);
@@ -118,7 +118,7 @@
         }
         .mobile-menu a:hover { color: var(--blue); background: var(--soft-blue); }
 
-        /* ── Hero ── */
+        /* â”€â”€ Hero â”€â”€ */
         .hero {
             position: relative; overflow: hidden; color: #fff;
             background: linear-gradient(145deg, #030d20 0%, #071f4f 45%, #0c1540 75%, #0e0830 100%);
@@ -202,36 +202,29 @@
         }
         .btn-outline:hover { background: var(--surface2); border-color: rgba(11,111,238,.3); color: var(--blue); }
 
-        /* hero photos */
-        .hero-photos {
+        /* hero visual canvas */
+        .hero-visual {
             flex-shrink: 0;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 210px 155px;
-            gap: 10px;
-            width: 440px;
+            width: 460px; height: 380px;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(11,111,238,.12) 0%, rgba(7,31,79,.35) 50%, rgba(237,28,36,.08) 100%);
+            border: 1px solid rgba(255,255,255,.1);
+            box-shadow: 0 24px 64px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.07);
         }
-        .hero-photo {
-            border-radius: 14px; overflow: hidden; position: relative;
+        .hero-visual canvas { width: 100%; height: 100%; display: block; }
+        .hero-visual-badge {
+            position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+            display: flex; align-items: center; gap: 10px;
+            background: rgba(7,31,79,.75); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,.12); border-radius: 40px;
+            padding: 10px 20px; white-space: nowrap;
         }
-        .hero-photo img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: transform .55s ease;
-        }
-        .hero-photo:hover img { transform: scale(1.06); }
-        .hero-photo::after {
-            content: ""; position: absolute; inset: 0; pointer-events: none;
-            background: linear-gradient(160deg, transparent 55%, rgba(5,13,35,.45) 100%);
-        }
-        .hp-tall {
-            grid-row: 1 / 3;
-            box-shadow: 0 20px 56px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08);
-        }
-        .hp-sm {
-            box-shadow: 0 10px 28px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.07);
-        }
+        .hero-visual-badge span { color: #c3d8f7; font-size: .76rem; font-weight: 700; letter-spacing: .04em; }
+        .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 4px rgba(34,197,94,.22); animation: pulse 2.2s infinite; flex-shrink: 0; }
 
-        /* ── Focus cards ── */
+        /* â”€â”€ Focus cards â”€â”€ */
         .focus-wrap { padding: 0; }
         .focus-grid {
             display: grid; grid-template-columns: repeat(3, 1fr);
@@ -271,7 +264,7 @@
         .focus-card:nth-child(2) .focus-link { color: var(--red); }
         .focus-card:nth-child(3) .focus-link { color: var(--green); }
 
-        /* ── Sections ── */
+        /* â”€â”€ Sections â”€â”€ */
         .section { padding: 80px 0; }
         .section-alt { background: var(--surface); }
 
@@ -309,7 +302,7 @@
         }
         .link-more:hover { gap: 10px; background: rgba(11,111,238,.15); }
 
-        /* ── News grid ── */
+        /* â”€â”€ News grid â”€â”€ */
         .news-grid { display: grid; grid-template-columns: 1.25fr .9fr .9fr; gap: 20px; }
         .news-card {
             border: 1px solid var(--line); border-radius: var(--radius);
@@ -368,7 +361,7 @@
         }
         .news-card:hover .read-link { opacity: 1; transform: none; }
 
-        /* ── Guide grid ── */
+        /* â”€â”€ Guide grid â”€â”€ */
         .guide-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
         .guide-card {
             padding: 24px 22px; border: 1px solid var(--line); border-radius: var(--radius);
@@ -394,7 +387,7 @@
         }
         .guide-card:hover .guide-arrow { opacity: 1; }
 
-        /* ── Shop grid ── */
+        /* â”€â”€ Shop grid â”€â”€ */
         .shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .shop-card {
             border: 1px solid var(--line); border-radius: var(--radius);
@@ -445,7 +438,7 @@
         }
         .small-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
 
-        /* ── Service band ── */
+        /* â”€â”€ Service band â”€â”€ */
         .service-band {
             display: grid; grid-template-columns: 1fr 1.05fr;
             gap: 0; align-items: stretch;
@@ -488,7 +481,7 @@
         .service-card h3 { margin: 0 0 5px; font-size: .92rem; font-weight: 800; }
         .service-card p { margin: 0; color: #9ab8d0; font-size: .83rem; line-height: 1.55; }
 
-        /* ── CTA ── */
+        /* â”€â”€ CTA â”€â”€ */
         .cta {
             padding: 44px 40px; display: grid;
             grid-template-columns: 1fr auto; gap: 28px; align-items: center;
@@ -506,7 +499,7 @@
         }
         .cta p { margin: 10px 0 0; color: var(--muted); font-size: .93rem; line-height: 1.7; position: relative; }
 
-        /* ── Footer ── */
+        /* â”€â”€ Footer â”€â”€ */
         .footer {
             background: #030d1e; color: #5a7a96;
             position: relative; overflow: hidden;
@@ -563,72 +556,35 @@
         .footer-contact-item svg { flex-shrink: 0; margin-top: 1px; color: #4a9eff; }
         .footer-contact-item a { color: #4a9eff; font-weight: 700; }
         .footer-contact-item a:hover { text-decoration: underline; }
-        .footer-partners {
-            margin-top: 42px;
-            padding: 24px;
-            border: 1px solid rgba(255,255,255,.08);
-            border-radius: 8px;
-            background: rgba(255,255,255,.035);
+        /* affiliation bar */
+        .footer-affil {
+            padding: 20px 0;
+            display: flex; align-items: center; justify-content: center; gap: 20px;
+            flex-wrap: wrap;
         }
-        .footer-partners-head {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 18px;
-            margin-bottom: 18px;
+        .footer-affil-label {
+            font-size: .7rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+            color: #3d5a75;
         }
-        .footer-partners-head .footer-col-title { margin-bottom: 7px; }
-        .footer-partners-head span {
-            display: block;
-            color: #4d6a83;
-            font-size: .82rem;
-            line-height: 1.55;
+        .footer-affil-logos { display: flex; align-items: center; gap: 12px; }
+        .footer-affil-item {
+            display: block; border-radius: 10px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,.12);
+            background: rgba(255,255,255,.08);
+            padding: 5px 10px;
+            transition: border-color .2s, background .2s;
         }
-        .footer-partners-head a {
-            flex-shrink: 0;
-            color: #4a9eff;
-            font-size: .78rem;
-            font-weight: 900;
+        .footer-affil-item:hover { border-color: rgba(255,255,255,.28); background: rgba(255,255,255,.14); }
+        .footer-affil-item img {
+            height: 34px; width: auto; max-width: 120px;
+            object-fit: contain; display: block;
+            filter: brightness(1.05) saturate(0.9);
+            mix-blend-mode: screen;
         }
-        .footer-partner-list {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 10px;
-        }
-        .footer-partner-card {
-            min-width: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,.08);
-            background: rgba(3,13,30,.45);
-        }
-        .footer-partner-mark {
-            width: 38px;
-            height: 38px;
-            flex: 0 0 38px;
-            border-radius: 8px;
-            display: grid;
-            place-items: center;
-            background: linear-gradient(135deg, rgba(11,111,238,.24), rgba(56,189,248,.12));
-            border: 1px solid rgba(74,158,255,.24);
-            color: #9ed0ff;
-            font-size: .72rem;
-            font-weight: 950;
-        }
-        .footer-partner-card strong {
-            display: block;
-            color: #cbd5e1;
-            font-size: .82rem;
-            margin-bottom: 2px;
-        }
-        .footer-partner-card small {
-            display: block;
-            color: #4d6a83;
-            font-size: .72rem;
-            line-height: 1.45;
+        [data-theme="light"] .footer-affil-item img { mix-blend-mode: normal; filter: brightness(1); }
+        .footer-affil-sep {
+            width: 1px; height: 28px;
+            background: rgba(255,255,255,.12);
         }
         .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.07); margin: 0; }
         .footer-bottom {
@@ -641,11 +597,11 @@
         .footer-bottom-links a { color: #304a62; transition: color .15s; }
         .footer-bottom-links a:hover { color: #4a9eff; }
 
-        /* ── Scroll reveal ── */
+        /* â”€â”€ Scroll reveal â”€â”€ */
         .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s, transform .6s; }
         .reveal.visible { opacity: 1; transform: none; }
 
-        /* ── Responsive ── */
+        /* â”€â”€ Responsive â”€â”€ */
         @media (max-width: 980px) {
             .nav-links { display: none; }
             .menu-btn { display: inline-grid; }
@@ -656,13 +612,12 @@
             .news-grid { grid-template-columns: 1fr 1fr; }
             .guide-grid { grid-template-columns: repeat(2, 1fr); }
             .hero-inner { gap: 36px; padding: 72px 0 64px; }
-            .hero-photos { width: 340px; grid-template-rows: 168px 124px; }
+            .hero-visual { width: 340px; height: 300px; }
             .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
-            .footer-partner-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
         @media (max-width: 640px) {
             .hero-inner { padding: 56px 0 48px; flex-direction: column; gap: 40px; }
-            .hero-photos { width: 100%; grid-template-rows: 160px 120px; }
+            .hero-visual { width: 100%; height: 220px; }
             .hero-copy { font-size: .96rem; }
             .section { padding: 56px 0; }
             .section-head { display: block; }
@@ -673,10 +628,6 @@
             .service-right { padding: 24px 24px 30px; }
             .cta { padding: 26px 22px; }
             .footer-inner { grid-template-columns: 1fr; gap: 28px; }
-            .footer-partners { padding: 18px; }
-            .footer-partners-head { display: block; }
-            .footer-partners-head a { display: inline-flex; margin-top: 10px; }
-            .footer-partner-list { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
             .footer-bottom-links { justify-content: center; flex-wrap: wrap; }
         }
@@ -694,6 +645,7 @@
                 <a href="#panduan" data-section="panduan">Panduan</a>
                 <a href="#toko" data-section="toko">Toko IT</a>
                 <a href="#jasa" data-section="jasa">Jasa</a>
+                <a href="{{ route('about') }}" data-section="about">Tentang</a>
                 <a href="#kontak" data-section="kontak">Kontak</a>
             </div>
             <div class="nav-right">
@@ -711,13 +663,14 @@
             <a href="#panduan">Panduan Belajar</a>
             <a href="#toko">Toko IT</a>
             <a href="#jasa">Jasa IT</a>
+            <a href="{{ route('about') }}">Tentang pahamIT</a>
             <a href="#kontak">Kontak</a>
         </div>
     </header>
 
     <main id="home">
 
-        {{-- ── HERO ── --}}
+        {{-- â”€â”€ HERO â”€â”€ --}}
         <section class="hero">
             <div class="hero-inner">
                 <div class="hero-text">
@@ -733,21 +686,17 @@
                         <a class="btn btn-soft" href="#toko">Toko IT</a>
                     </div>
                 </div>
-                <div class="hero-photos" aria-hidden="true">
-                    <div class="hero-photo hp-tall">
-                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80&auto=format&fit=crop" alt="">
-                    </div>
-                    <div class="hero-photo hp-sm">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=420&q=80&auto=format&fit=crop" alt="">
-                    </div>
-                    <div class="hero-photo hp-sm">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=420&q=80&auto=format&fit=crop" alt="">
+                <div class="hero-visual" aria-hidden="true">
+                    <canvas id="heroCanvas"></canvas>
+                    <div class="hero-visual-badge">
+                        <span class="badge-dot"></span>
+                        <span>Network - Security - IT</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        {{-- ── FOCUS CARDS ── --}}
+        {{-- â”€â”€ FOCUS CARDS â”€â”€ --}}
         <section class="wrap focus-wrap">
             <div class="focus-grid reveal">
                 <article class="focus-card">
@@ -755,7 +704,7 @@
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 5h16M4 10h16M4 15h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                     </div>
                     <h2>Berita IT Terkini</h2>
-                    <p>Update teknologi, keamanan siber, AI, cloud, jaringan, dan insight industri — dikemas ringkas dan mudah dipahami.</p>
+                    <p>Update teknologi, keamanan siber, AI, cloud, jaringan, dan insight industri - dikemas ringkas dan mudah dipahami.</p>
                     <a class="focus-link" href="#berita">Baca berita <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                 </article>
                 <article class="focus-card">
@@ -763,7 +712,7 @@
                         <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M8 4h12v16H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4Zm0 0v16M12 8h4M12 12h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
                     </div>
                     <h2>Panduan & Tutorial</h2>
-                    <p>Tutorial bertahap untuk network, server, Linux, security, dan troubleshooting — dari dasar hingga siap praktik langsung.</p>
+                    <p>Tutorial bertahap untuk network, server, Linux, security, dan troubleshooting - dari dasar hingga siap praktik langsung.</p>
                     <a class="focus-link" href="#panduan">Mulai belajar <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
                 </article>
                 <article class="focus-card">
@@ -777,16 +726,16 @@
             </div>
         </section>
 
-        {{-- ── BERITA ── --}}
+        {{-- â”€â”€ BERITA â”€â”€ --}}
         <section class="section" id="berita">
             <div class="wrap">
                 <div class="section-head reveal">
                     <div>
                         <p class="label label-blue">Berita IT</p>
                         <h2 class="section-title">Update teknologi, langsung ke intinya.</h2>
-                        <p class="section-copy">Berita IT terbaru — jaringan, keamanan, AI, cloud, dan software — disajikan ringkas dan mudah dicerna.</p>
+                        <p class="section-copy">Berita IT terbaru - jaringan, keamanan, AI, cloud, dan software - disajikan ringkas dan mudah dicerna.</p>
                     </div>
-                    <a class="link-more" href="#panduan">Lihat panduan
+                    <a class="link-more" href="{{ route('listing.berita') }}">Lihat semua berita
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </a>
                 </div>
@@ -831,15 +780,18 @@
             </div>
         </section>
 
-        {{-- ── PANDUAN ── --}}
+        {{-- â”€â”€ PANDUAN â”€â”€ --}}
         <section class="section section-alt" id="panduan">
             <div class="wrap">
                 <div class="section-head reveal">
                     <div>
                         <p class="label label-red">Panduan & Belajar IT</p>
                         <h2 class="section-title">Dari dasar sampai siap praktik.</h2>
-                        <p class="section-copy">Tutorial runtut untuk networking, server, Linux, cyber security, dan troubleshooting — cocok untuk pemula maupun yang ingin naik level.</p>
+                        <p class="section-copy">Tutorial runtut untuk networking, server, Linux, cyber security, dan troubleshooting - cocok untuk pemula maupun yang ingin naik level.</p>
                     </div>
+                    <a class="link-more" href="{{ route('listing.panduan') }}">Lihat semua panduan
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
                 </div>
                 <div class="guide-grid reveal">
                     @forelse ($tutorialPosts as $post)
@@ -853,14 +805,14 @@
                         <article class="guide-card">
                             <div class="guide-num">01</div>
                             <h3>Tutorial pertama menunggu</h3>
-                            <p>Tambahkan panduan dari dashboard — akan tampil otomatis di sini.</p>
+                            <p>Tambahkan panduan dari dashboard - akan tampil otomatis di sini.</p>
                         </article>
                     @endforelse
                 </div>
             </div>
         </section>
 
-        {{-- ── TOKO ── --}}
+        {{-- â”€â”€ TOKO â”€â”€ --}}
         <section class="section" id="toko">
             <div class="wrap">
                 <div class="section-head reveal">
@@ -916,14 +868,14 @@
             </div>
         </section>
 
-        {{-- ── JASA ── --}}
+        {{-- â”€â”€ JASA â”€â”€ --}}
         <section class="section section-alt" id="jasa">
             <div class="wrap">
                 <div class="service-band reveal">
                     <div class="service-left">
                         <p class="label" style="color:#93c5fd;margin-bottom:16px;">Jasa IT pahamIT</p>
                         <h2>Infrastruktur stabil, belajar jalan, bisnis aman.</h2>
-                        <p>pahamIT hadir sebagai partner teknis untuk setup, audit, dan maintenance infrastruktur IT — tidak hanya media baca, tapi solusi nyata.</p>
+                        <p>pahamIT hadir sebagai partner teknis untuk setup, audit, dan maintenance infrastruktur IT - tidak hanya media baca, tapi solusi nyata.</p>
                         <div class="service-actions">
                             <a class="btn btn-primary" href="#kontak">Diskusi Kebutuhan</a>
                             <a class="btn btn-soft" href="#toko">Lihat Produk</a>
@@ -947,15 +899,15 @@
             </div>
         </section>
 
-        {{-- ── CTA / KONTAK ── --}}
+        {{-- â”€â”€ CTA / KONTAK â”€â”€ --}}
         <section class="section" id="kontak">
             <div class="wrap">
                 <div class="cta reveal">
                     <div>
                         <h2>Ada kebutuhan IT? Mari diskusi.</h2>
-                        <p>Dari pertanyaan teknis hingga kebutuhan infrastruktur — tim pahamIT siap membantu lewat konsultasi langsung via WhatsApp.</p>
+                        <p>Dari pertanyaan teknis hingga kebutuhan infrastruktur - tim pahamIT siap membantu lewat konsultasi langsung via WhatsApp.</p>
                     </div>
-                    <a class="btn btn-primary" href="https://wa.me/6281234567890" target="_blank" rel="noreferrer" style="flex-shrink:0;">
+                    <a class="btn btn-primary" href="https://wa.me/6281250653005" target="_blank" rel="noreferrer" style="flex-shrink:0;">
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         Hubungi via WhatsApp
                     </a>
@@ -980,16 +932,16 @@
                         </div>
                         <p class="footer-desc">Portal berita IT, panduan belajar, dan toko alat & jasa IT terpercaya untuk profesional dan pelajar Indonesia.</p>
                         <div class="footer-social">
-                            <a href="#" title="Twitter/X" aria-label="Twitter">
+                            <a href="mailto:info@pahamit.com" title="Email" aria-label="Email pahamIT">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                             </a>
-                            <a href="#" title="Instagram" aria-label="Instagram">
+                            <a href="https://wa.me/6281250653005" target="_blank" rel="noreferrer" title="WhatsApp" aria-label="WhatsApp pahamIT">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor" stroke="none"/></svg>
                             </a>
-                            <a href="#" title="YouTube" aria-label="YouTube">
+                            <a href="{{ route('seo.sitemap') }}" title="Sitemap" aria-label="Sitemap pahamIT">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814ZM9.545 15.568V8.432L15.818 12l-6.273 3.568Z"/></svg>
                             </a>
-                            <a href="#" title="LinkedIn" aria-label="LinkedIn">
+                            <a href="{{ route('privacy') }}" title="Kebijakan Privasi" aria-label="Kebijakan Privasi pahamIT">
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6ZM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
                             </a>
                         </div>
@@ -1010,10 +962,10 @@
                     <div>
                         <p class="footer-col-title">Layanan</p>
                         <nav class="footer-nav">
-                            <a href="#"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Konsultasi IT</a>
-                            <a href="#"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Template & Tools</a>
-                            <a href="#"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Pelatihan IT</a>
-                            <a href="#"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Pasang Iklan</a>
+                            <a href="#kontak"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Konsultasi IT</a>
+                            <a href="#toko"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Template & Tools</a>
+                            <a href="#jasa"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Pelatihan IT</a>
+                            <a href="#kontak"><svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Pasang Iklan</a>
                         </nav>
                     </div>
 
@@ -1022,7 +974,7 @@
                         <p class="footer-col-title">Kontak</p>
                         <div class="footer-contact-item">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0Z" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/></svg>
-                            <span>Jakarta Selatan, Indonesia</span>
+                            <span>Indonesia</span>
                         </div>
                         <div class="footer-contact-item">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2Z" stroke="currentColor" stroke-width="2"/><path d="m22 6-10 7L2 6" stroke="currentColor" stroke-width="2"/></svg>
@@ -1030,19 +982,32 @@
                         </div>
                         <div class="footer-contact-item">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z" stroke="currentColor" stroke-width="2"/></svg>
-                            <span><a href="#">Chat WhatsApp</a></span>
+                            <span><a href="https://wa.me/6281250653005" target="_blank" rel="noreferrer">081250653005</a></span>
                         </div>
                     </div>
                 </div>
-                @include('site.partials.footer-partners')
+            </div>
+            <div class="footer-affil">
+                <span class="footer-affil-label">Member of</span>
+                <div class="footer-affil-logos">
+                    <a href="mailto:info@pahamit.com?subject=Info%20Elata" class="footer-affil-item" title="Elata">
+                        <img src="{{ asset('images/images/elata.jpeg') }}" alt="Elata">
+                    </a>
+                    <span class="footer-affil-sep"></span>
+                    <a href="https://fluxaborneo.tech" target="_blank" rel="noreferrer" class="footer-affil-item" title="Fluxa Borneo Tech">
+                        <img src="{{ asset('images/images/fluxa.jpeg') }}" alt="Fluxa Borneo Tech">
+                    </a>
+                </div>
             </div>
             <hr class="footer-divider">
             <div class="footer-bottom">
                 <span>&copy; {{ date('Y') }} <strong>pahamIT</strong>. Semua hak dilindungi.</span>
                 <div class="footer-bottom-links">
-                    <a href="#">Kebijakan Privasi</a>
-                    <a href="#">Syarat & Ketentuan</a>
-                    <a href="#">Sitemap</a>
+                    <a href="{{ route('about') }}">Tentang</a>
+                    <a href="{{ route('listing.berita') }}">Semua Berita</a>
+                    <a href="{{ route('listing.panduan') }}">Semua Panduan</a>
+                    <a href="{{ route('privacy') }}">Kebijakan Privasi</a>
+                    <a href="{{ route('seo.sitemap') }}">Sitemap</a>
                 </div>
             </div>
         </div>
@@ -1090,6 +1055,129 @@
             });
         }, { threshold: 0.07 });
         document.querySelectorAll('.reveal').forEach(el => rObs.observe(el));
+
+        /* â”€â”€ Hero Canvas - IT Neuron Network â”€â”€ */
+        (function() {
+            const canvas = document.getElementById('heroCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let W, H, nodes, raf;
+            const dpr = window.devicePixelRatio || 1;
+
+            const TERMS = [
+                { label: 'Docker',        color: '#4a9eff' },
+                { label: 'Kubernetes',    color: '#ed4a50' },
+                { label: 'CI/CD',         color: '#4a9eff' },
+                { label: 'Linux',         color: '#f9a825' },
+                { label: 'Nginx',         color: '#4a9eff' },
+                { label: 'Python',        color: '#4a9eff' },
+                { label: 'DevOps',        color: '#ed4a50' },
+                { label: 'Network',       color: '#4a9eff' },
+                { label: 'Security',      color: '#ed4a50' },
+                { label: 'DNS',           color: '#4a9eff' },
+                { label: 'VPN',           color: '#4a9eff' },
+                { label: 'API',           color: '#4a9eff' },
+                { label: 'Cloud',         color: '#ed4a50' },
+                { label: 'Firewall',      color: '#ed4a50' },
+                { label: 'SSH',           color: '#4a9eff' },
+                { label: 'TCP/IP',        color: '#4a9eff' },
+                { label: 'Git',           color: '#f9a825' },
+                { label: 'Server',        color: '#4a9eff' },
+                { label: 'Ansible',       color: '#ed4a50' },
+                { label: 'Terraform',     color: '#4a9eff' },
+            ];
+
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                W = canvas.width  = rect.width  * dpr;
+                H = canvas.height = rect.height * dpr;
+                canvas.style.width  = rect.width  + 'px';
+                canvas.style.height = rect.height + 'px';
+                init();
+            }
+
+            function init() {
+                const pad = 48 * dpr;
+                nodes = TERMS.map(t => ({
+                    label: t.label,
+                    color: t.color,
+                    x: pad + Math.random() * (W - pad * 2),
+                    y: pad + Math.random() * (H - pad * 2),
+                    vx: (Math.random() - 0.5) * 0.22,
+                    vy: (Math.random() - 0.5) * 0.22,
+                    r:  (Math.random() * 1.5 + 2.5) * dpr,
+                    phase: Math.random() * Math.PI * 2,
+                }));
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                const LINK = 125 * dpr;
+                const t = performance.now() / 1000;
+
+                for (const n of nodes) {
+                    n.x += n.vx; n.y += n.vy;
+                    if (n.x < 0 || n.x > W) n.vx *= -1;
+                    if (n.y < 0 || n.y > H) n.vy *= -1;
+                }
+
+                /* synaptic lines */
+                for (let i = 0; i < nodes.length; i++) {
+                    for (let j = i + 1; j < nodes.length; j++) {
+                        const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+                        const d = Math.sqrt(dx * dx + dy * dy);
+                        if (d < LINK) {
+                            const a = (1 - d / LINK) * 0.3;
+                            ctx.beginPath();
+                            ctx.moveTo(nodes[i].x, nodes[i].y);
+                            ctx.lineTo(nodes[j].x, nodes[j].y);
+                            ctx.strokeStyle = `rgba(74,158,255,${a})`;
+                            ctx.lineWidth = 0.8 * dpr;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                /* nodes + labels */
+                const fontSize = Math.round(8.5 * dpr);
+                ctx.font = `600 ${fontSize}px "Instrument Sans",system-ui,sans-serif`;
+                ctx.textAlign = 'center';
+
+                for (const n of nodes) {
+                    const pulse = n.r + Math.sin(t * 1.8 + n.phase) * 1.2 * dpr;
+
+                    /* soft glow */
+                    const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, pulse * 6);
+                    const isBlue = n.color === '#4a9eff';
+                    g.addColorStop(0, isBlue ? 'rgba(74,158,255,.22)' : n.color === '#f9a825' ? 'rgba(249,168,37,.18)' : 'rgba(237,74,80,.22)');
+                    g.addColorStop(1, 'transparent');
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, pulse * 6, 0, Math.PI * 2);
+                    ctx.fillStyle = g;
+                    ctx.fill();
+
+                    /* dot */
+                    ctx.beginPath();
+                    ctx.arc(n.x, n.y, pulse, 0, Math.PI * 2);
+                    ctx.fillStyle = n.color;
+                    ctx.fill();
+
+                    /* label */
+                    ctx.fillStyle = 'rgba(193,218,255,0.78)';
+                    ctx.fillText(n.label, n.x, n.y + pulse + 11 * dpr);
+                }
+
+                raf = requestAnimationFrame(draw);
+            }
+
+            const obs = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) { if (!raf) draw(); }
+                else { cancelAnimationFrame(raf); raf = null; }
+            });
+            obs.observe(canvas.parentElement);
+            resize();
+            window.addEventListener('resize', resize, { passive: true });
+        })();
     </script>
     @include('site.partials.adroll')
 </body>

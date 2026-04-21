@@ -1,4 +1,4 @@
-@extends('auth.layout', ['title' => 'Lupa Password'])
+﻿@extends('auth.layout', ['title' => 'Lupa Password'])
 
 @section('content')
     <h1>Lupa Password</h1>

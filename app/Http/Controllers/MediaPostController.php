@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MediaPost;
+use App\Models\Series;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +60,7 @@ class MediaPostController extends Controller
             'post' => new MediaPost(['type' => $type, 'status' => 'draft']),
             'formAction' => route('dashboard.posts.store', $type),
             'method' => 'POST',
+            'allSeries' => $type === MediaPost::TYPE_TUTORIAL ? Series::orderBy('title')->get() : collect(),
         ]);
     }
 
@@ -89,6 +91,7 @@ class MediaPostController extends Controller
             'post' => $post,
             'formAction' => route('dashboard.posts.update', [$type, $post]),
             'method' => 'PUT',
+            'allSeries' => $type === MediaPost::TYPE_TUTORIAL ? Series::orderBy('title')->get() : collect(),
         ]);
     }
 
@@ -135,6 +138,8 @@ class MediaPostController extends Controller
             'canonical_url' => ['nullable', 'url', 'max:255'],
             'content' => ['nullable', 'string'],
             'price' => [$type === MediaPost::TYPE_JUALAN ? 'nullable' : 'exclude', 'nullable', 'numeric', 'min:0'],
+            'series_id' => [$type === MediaPost::TYPE_TUTORIAL ? 'nullable' : 'exclude', 'nullable', 'exists:series,id'],
+            'series_order' => [$type === MediaPost::TYPE_TUTORIAL ? 'nullable' : 'exclude', 'nullable', 'integer', 'min:1'],
             'status' => ['required', Rule::in(['draft', 'review', 'published'])],
             'image_url' => ['nullable', 'url', 'max:255'],
             'featured_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],

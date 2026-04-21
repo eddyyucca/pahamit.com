@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "pahamit/portal",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Portal berita, panduan, toko, dan dashboard redaksi pahamIT.",
+    "keywords": ["pahamit", "portal", "laravel", "it"],
     "license": "MIT",
     "require": {
         "php": "^8.2",

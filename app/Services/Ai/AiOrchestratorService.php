@@ -8,8 +8,8 @@ use App\Models\AiDraft;
 class AiOrchestratorService
 {
     public function __construct(
-        private readonly OpenAiAgentService $openAi,
-        private readonly ClaudeAgentService $claude,
+        private readonly GeminiAgentService $gemini,
+        private readonly GeminiImageService $images,
     ) {
     }
 
@@ -24,7 +24,7 @@ class AiOrchestratorService
         $messages = $this->messages($conversation);
 
         if ($action === 'draft') {
-            $draftData = $this->openAi->draft($conversation, $messages, $this->draftType($conversation->type));
+            $draftData = $this->gemini->draft($conversation, $messages, $this->draftType($conversation->type));
             $draft = $conversation->drafts()->create([
                 'type' => $this->draftType($conversation->type),
                 'title' => $draftData['title'],
@@ -36,13 +36,31 @@ class AiOrchestratorService
                 'status' => 'generated',
             ]);
 
-            $reply = "Draft sudah dibuat oleh ChatGPT dan tersimpan di panel kanan.\n\n"
+            $imageNote = '';
+            $metadata = $draft->metadata ?? [];
+
+            try {
+                $image = $this->images->generateForDraft($conversation, $draftData);
+
+                if ($image) {
+                    $metadata = array_merge($metadata, $image);
+                    $draft->update(['metadata' => $metadata]);
+                    $imageNote = "\n\nFeatured image otomatis juga sudah dibuat dengan gaya visual Pahamit.";
+                }
+            } catch (\Throwable $exception) {
+                $metadata['image_error'] = $exception->getMessage();
+                $draft->update(['metadata' => $metadata]);
+                $imageNote = "\n\nCatatan: draft berhasil dibuat, tetapi gambar otomatis belum berhasil dibuat: {$exception->getMessage()}";
+            }
+
+            $reply = "Draft sudah dibuat oleh Gemini Agent dan tersimpan di panel kanan.\n\n"
                 . "**{$draft->title}**\n\n"
-                . "Langkah berikutnya: klik `Review Claude` untuk penyuntingan, atau `Simpan ke Draft Konten` kalau sudah cocok.";
+                . "Langkah berikutnya: klik `Review Gemini` untuk penyuntingan, atau `Simpan ke Draft Konten` kalau sudah cocok."
+                . $imageNote;
 
             $conversation->messages()->create([
                 'role' => 'assistant',
-                'provider' => 'openai',
+                'provider' => 'gemini',
                 'content' => $reply,
                 'metadata' => ['action' => 'draft', 'draft_id' => $draft->id],
             ]);
@@ -53,11 +71,11 @@ class AiOrchestratorService
         if ($action === 'review') {
             $draft = $conversation->drafts()->latest()->first();
             $content = $draft?->content ?: $message;
-            $reply = $this->claude->review($conversation, $content);
+            $reply = $this->gemini->review($conversation, $content);
 
             $conversation->messages()->create([
                 'role' => 'assistant',
-                'provider' => 'anthropic',
+                'provider' => 'gemini',
                 'content' => $reply,
                 'metadata' => ['action' => 'review', 'draft_id' => $draft?->id],
             ]);
@@ -65,11 +83,11 @@ class AiOrchestratorService
             return ['reply' => $reply, 'draft' => $draft];
         }
 
-        $reply = $this->openAi->respond($conversation, $messages, $action);
+        $reply = $this->gemini->respond($conversation, $messages, $action);
 
         $conversation->messages()->create([
             'role' => 'assistant',
-            'provider' => 'openai',
+            'provider' => 'gemini',
             'content' => $reply,
             'metadata' => ['action' => $action],
         ]);

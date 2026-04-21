@@ -21,6 +21,8 @@ class MediaPost extends Model
     protected $fillable = [
         'user_id',
         'type',
+        'series_id',
+        'series_order',
         'title',
         'slug',
         'category',
@@ -35,6 +37,8 @@ class MediaPost extends Model
         'status',
         'image_url',
         'image_path',
+        'image_prompt',
+        'image_generation_model',
         'views_count',
         'published_at',
     ];
@@ -50,6 +54,11 @@ class MediaPost extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function series(): BelongsTo
+    {
+        return $this->belongsTo(Series::class);
     }
 
     public function postViews(): HasMany
@@ -70,7 +79,7 @@ class MediaPost extends Model
     public function getFeaturedImageUrlAttribute(): ?string
     {
         if ($this->image_path) {
-            return Storage::disk('public')->url($this->image_path);
+            return url('storage/' . ltrim($this->image_path, '/'));
         }
 
         return $this->image_url;

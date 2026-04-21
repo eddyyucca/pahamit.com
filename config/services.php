@@ -35,15 +35,18 @@ return [
         ],
     ],
 
-    'openai' => [
-        'key' => env('OPENAI_API_KEY'),
-        'model' => env('OPENAI_MODEL', 'gpt-5'),
-    ],
-
-    'anthropic' => [
-        'key' => env('ANTHROPIC_API_KEY'),
-        'model' => env('ANTHROPIC_MODEL', 'claude-sonnet-4-20250514'),
-        'version' => env('ANTHROPIC_VERSION', '2023-06-01'),
+    'gemini' => [
+        'key' => env('GEMINI_API_KEY'),
+        'model' => env('GEMINI_MODEL', 'gemini-2.5-flash'),
+        'image_model' => env('GEMINI_IMAGE_MODEL', 'gemini-2.5-flash-image'),
+        'image_fallback_models' => array_values(array_filter(array_map(
+            'trim',
+            explode(',', env('GEMINI_IMAGE_FALLBACK_MODELS', 'gemini-2.0-flash-preview-image-generation'))
+        ))),
+        'fallback_models' => array_values(array_filter(array_map(
+            'trim',
+            explode(',', env('GEMINI_FALLBACK_MODELS', 'gemini-2.0-flash,gemini-1.5-flash'))
+        ))),
     ],
 
 ];

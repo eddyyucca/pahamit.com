@@ -1,6 +1,6 @@
-@extends('dashboard.layout', [
+﻿@extends('dashboard.layout', [
     'title' => 'AI Agent',
-    'description' => 'Diskusi tema, buat draft dengan ChatGPT, lalu review dengan Claude.',
+    'description' => 'Diskusi tema, buat draft, dan review konten dengan Gemini Agent.',
 ])
 
 @php
@@ -17,7 +17,7 @@
     <div>
         <span class="ai-kicker">Pahamit AI Workspace</span>
         <h2>Diskusikan tema, susun draft, lalu review sebelum publish.</h2>
-        <p>ChatGPT membantu merancang dan menulis. Claude disiapkan sebagai reviewer agar draft lebih rapi sebelum masuk ke konten.</p>
+        <p>Gemini Agent membantu merancang ide, menulis draft, mengoptimasi SEO, dan mereview konten sebelum masuk ke konten.</p>
     </div>
     <div class="ai-hero-steps">
         <span>Brief</span>
@@ -57,7 +57,7 @@
                 <a class="ai-convo {{ $item->is($conversation) ? 'active' : '' }}"
                    href="{{ route('dashboard.ai.show', $item) }}">
                     <strong>{{ Str::limit($item->title, 34) }}</strong>
-                    <span>{{ $types[$item->type] ?? ucfirst($item->type) }} · {{ $item->updated_at->diffForHumans() }}</span>
+                    <span>{{ $types[$item->type] ?? ucfirst($item->type) }} - {{ $item->updated_at->diffForHumans() }}</span>
                 </a>
             @endforeach
         </div>
@@ -68,7 +68,7 @@
             <div class="panel-head">
                 <div>
                     <h2>Konteks Agent</h2>
-                    <p>Isi ini agar ChatGPT dan Claude paham tujuan konten sebelum menulis.</p>
+                    <p>Isi ini agar Gemini paham tujuan konten sebelum menulis.</p>
                 </div>
             </div>
             <form action="{{ route('dashboard.ai.update', $conversation) }}" method="post" class="ai-context-grid">
@@ -109,11 +109,12 @@
             <div class="panel-head">
                 <div>
                     <h2>Chat Dengan Agent</h2>
-                    <p>ChatGPT berdiskusi dan membuat draft. Claude mereview draft saat diminta.</p>
+                    <p>Gemini berdiskusi, membuat draft, mengoptimasi SEO, dan mereview draft saat diminta.</p>
                 </div>
                 <div class="ai-provider-badges">
-                    <span class="active">ChatGPT</span>
-                    <span>Claude</span>
+                    <span class="active">Gemini</span>
+                    <span>SEO</span>
+                    <span>Review</span>
                 </div>
             </div>
 
@@ -127,8 +128,8 @@
                         <div class="ai-avatar">
                             @if ($message->role === 'user')
                                 U
-                            @elseif ($message->provider === 'anthropic')
-                                C
+                            @elseif ($message->provider === 'gemini')
+                                G
                             @else
                                 AI
                             @endif
@@ -138,12 +139,12 @@
                                 <strong>
                                     @if ($message->role === 'user')
                                         Anda
-                                    @elseif ($message->provider === 'anthropic')
-                                        Claude Reviewer
+                                    @elseif ($message->provider === 'gemini')
+                                        Gemini Agent
                                     @elseif ($message->provider === 'system')
                                         AI Agent
                                     @else
-                                        ChatGPT Agent
+                                        AI Agent
                                     @endif
                                 </strong>
                                 <span>{{ $message->created_at->format('d M H:i') }}</span>
@@ -165,7 +166,7 @@
                     <button class="btn btn-soft" name="action" value="chat" type="submit">Kirim Chat</button>
                     <button class="btn btn-soft" name="action" value="outline" type="submit">Outline</button>
                     <button class="btn btn-primary" name="action" value="draft" type="submit">Buat Draft</button>
-                    <button class="btn btn-soft" name="action" value="review" type="submit">Review Claude</button>
+                    <button class="btn btn-soft" name="action" value="review" type="submit">Review Gemini</button>
                 </div>
             </form>
         </section>
@@ -180,12 +181,32 @@
         </div>
 
         @if ($draft)
+            @php
+                $generatedImage = data_get($draft->metadata, 'image_path')
+                    ? url('storage/' . ltrim(data_get($draft->metadata, 'image_path'), '/'))
+                    : null;
+                $imagePrompt = data_get($draft->metadata, 'image_prompt');
+                $imageError = data_get($draft->metadata, 'image_error');
+            @endphp
             <div class="ai-draft-meta">
                 <span class="badge blue">{{ ucfirst($draft->type) }}</span>
                 <span class="badge {{ $draft->status === 'saved' ? 'green' : 'amber' }}">{{ ucfirst($draft->status) }}</span>
             </div>
             <h3 class="ai-draft-title">{{ $draft->title }}</h3>
             <p class="ai-draft-excerpt">{{ $draft->excerpt }}</p>
+            @if ($generatedImage)
+                <img class="ai-draft-image" src="{{ $generatedImage }}" alt="{{ $draft->title }}">
+            @elseif ($imageError)
+                <div class="flash" style="background:var(--rose-soft);color:var(--rose);border-color:transparent;">
+                    Gambar otomatis belum berhasil dibuat: {{ Str::limit($imageError, 180) }}
+                </div>
+            @endif
+            @if ($imagePrompt)
+                <details class="ai-image-prompt">
+                    <summary>Prompt gambar</summary>
+                    <p>{{ $imagePrompt }}</p>
+                </details>
+            @endif
             <div class="ai-draft-content">{!! nl2br(e(Str::limit($draft->content, 1800))) !!}</div>
 
             @if (! empty($draft->sources))
@@ -516,6 +537,33 @@
         font-size: .86rem;
         line-height: 1.6;
         margin-bottom: 12px;
+    }
+    .ai-draft-image {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        margin-bottom: 14px;
+        background: var(--surface2);
+    }
+    .ai-image-prompt {
+        margin-bottom: 14px;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--surface2);
+        color: var(--text2);
+        font-size: .82rem;
+        line-height: 1.65;
+    }
+    .ai-image-prompt summary {
+        cursor: pointer;
+        font-weight: 900;
+        color: var(--text);
+    }
+    .ai-image-prompt p {
+        margin-top: 10px;
     }
     .ai-draft-content {
         max-height: 520px;

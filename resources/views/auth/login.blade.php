@@ -1,4 +1,4 @@
-@extends('auth.layout', ['title' => 'Login Admin'])
+﻿@extends('auth.layout', ['title' => 'Login Admin'])
 
 @section('content')
     <h1>Login Dashboard</h1>

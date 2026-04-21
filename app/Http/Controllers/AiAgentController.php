@@ -6,6 +6,7 @@ use App\Models\AiConversation;
 use App\Models\AiDraft;
 use App\Models\MediaPost;
 use App\Services\Ai\AiOrchestratorService;
+use App\Services\Ai\GeminiImageService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +61,7 @@ class AiAgentController extends Controller
 
         $conversation = AiConversation::create([
             'user_id' => Auth::id(),
-            'title' => $data['title'] ?: 'Percakapan ' . ucfirst($data['type']),
+            'title' => ($data['title'] ?? null) ?: 'Percakapan ' . ucfirst($data['type']),
             'type' => $data['type'],
             'goal' => $data['goal'] ?? null,
             'audience' => $data['audience'] ?? null,
@@ -70,7 +71,7 @@ class AiAgentController extends Controller
         $conversation->messages()->create([
             'role' => 'assistant',
             'provider' => 'system',
-            'content' => "Halo. Saya AI Agent Pahamit. Ceritakan tema, tujuan, target pembaca, dan arah CTA yang ingin dibuat. Setelah itu saya bisa bantu buat outline, draft, lalu minta Claude mereview.",
+            'content' => "Halo. Saya Gemini Agent Pahamit. Ceritakan tema, tujuan, target pembaca, dan arah CTA yang ingin dibuat. Setelah itu saya bisa bantu buat outline, draft, dan review editorial dalam satu alur Gemini.",
             'metadata' => ['action' => 'welcome'],
         ]);
 
@@ -112,7 +113,7 @@ class AiAgentController extends Controller
         return redirect()->route('dashboard.ai.show', $conversation);
     }
 
-    public function saveDraft(AiConversation $conversation, AiDraft $draft): RedirectResponse
+    public function saveDraft(AiConversation $conversation, AiDraft $draft, GeminiImageService $images): RedirectResponse
     {
         abort_unless($conversation->user_id === Auth::id() && $draft->ai_conversation_id === $conversation->id, 403);
 
@@ -120,6 +121,28 @@ class AiAgentController extends Controller
             return redirect()
                 ->route('dashboard.posts.edit', [$draft->type, $draft->mediaPost])
                 ->with('status', 'Draft ini sudah pernah disimpan ke konten.');
+        }
+
+        $metadata = $draft->metadata ?? [];
+
+        if (blank(data_get($metadata, 'image_path'))) {
+            try {
+                $image = $images->generateForDraft($conversation, [
+                    'title' => $draft->title,
+                    'category' => $draft->category,
+                    'excerpt' => $draft->excerpt,
+                    'content' => $draft->content,
+                    'metadata' => $metadata,
+                ]);
+
+                if ($image) {
+                    $metadata = array_merge($metadata, $image);
+                    $draft->update(['metadata' => $metadata]);
+                }
+            } catch (\Throwable $exception) {
+                $metadata['image_error'] = $exception->getMessage();
+                $draft->update(['metadata' => $metadata]);
+            }
         }
 
         $post = MediaPost::create([
@@ -133,6 +156,9 @@ class AiAgentController extends Controller
             'seo_description' => data_get($draft->metadata, 'seo_description'),
             'focus_keyword' => data_get($draft->metadata, 'focus_keyword'),
             'content' => $this->contentWithSources($draft),
+            'image_path' => data_get($metadata, 'image_path'),
+            'image_prompt' => data_get($metadata, 'image_prompt'),
+            'image_generation_model' => data_get($metadata, 'image_generation_model'),
             'status' => 'draft',
             'views_count' => 0,
             'published_at' => null,

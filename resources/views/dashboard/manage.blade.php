@@ -1,4 +1,4 @@
-@extends('dashboard.layout', [
+﻿@extends('dashboard.layout', [
     'title'       => $title,
     'description' => $description,
 ])
@@ -11,7 +11,7 @@
         @method('PUT')
     @endif
 
-    {{-- ── Editor main ─────────────────────────────────────── --}}
+    {{-- â”€â”€ Editor main â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ --}}
     <div class="editor-main">
 
         {{-- Title --}}
@@ -41,8 +41,8 @@
             <div class="editor-section-bar">
                 <label for="content" style="font-size:.78rem;font-weight:700;color:var(--text2);">Isi Konten</label>
                 <div class="editor-mode-actions">
-                    <button type="button" id="btnEditorOnly" class="tool-btn tool-tab active" title="Mode Editor">✏️ Editor</button>
-                    <button type="button" id="btnSplitView" class="tool-btn tool-tab" title="Editor + Preview">⬌ Split</button>
+                    <button type="button" id="btnEditorOnly" class="tool-btn tool-tab active" title="Mode Editor">Editor</button>
+                    <button type="button" id="btnSplitView" class="tool-btn tool-tab" title="Editor + Preview">Split</button>
                     @if ($post->exists)
                     <a href="{{ route('dashboard.posts.preview', [$type, $post]) }}" target="_blank"
                        class="tool-btn" title="Lihat pratinjau artikel" style="display:inline-flex;align-items:center;gap:5px;font-size:.78rem;background:var(--brand-soft);color:var(--brand);border-color:rgba(79,70,229,.25);">
@@ -67,22 +67,22 @@
                 <span style="width:1px;height:22px;background:var(--border);display:inline-block;margin:0 2px;"></span>
 
                 {{-- Lists --}}
-                <button class="tool-btn" type="button" data-insert="&#10;- Item pertama&#10;- Item kedua&#10;- Item ketiga&#10;" title="Unordered List">☰</button>
+                <button class="tool-btn" type="button" data-insert="&#10;- Item pertama&#10;- Item kedua&#10;- Item ketiga&#10;" title="Unordered List">List</button>
                 <button class="tool-btn" type="button" data-insert="&#10;1. Item pertama&#10;2. Item kedua&#10;3. Item ketiga&#10;" title="Ordered List">1.</button>
                 <button class="tool-btn" type="button" data-insert="&#10;> Tulis kutipan di sini&#10;" title="Blockquote">"</button>
-                <button class="tool-btn" type="button" data-insert="&#10;---&#10;" title="Garis pemisah">—</button>
+                <button class="tool-btn" type="button" data-insert="&#10;---&#10;" title="Garis pemisah">-</button>
                 <span style="width:1px;height:22px;background:var(--border);display:inline-block;margin:0 2px;"></span>
 
                 {{-- Link --}}
-                <button class="tool-btn" type="button" id="btnInsertLink" title="Sisipkan Link" style="font-size:.75rem;">🔗 Link</button>
+                <button class="tool-btn" type="button" id="btnInsertLink" title="Sisipkan Link" style="font-size:.75rem;">Link</button>
 
                 {{-- Code --}}
                 <button class="tool-btn" type="button" data-insert="`kode inline`" title="Kode Inline">&lt;&gt;</button>
-                <button class="tool-btn" type="button" id="btnInsertCode" title="Blok Kode / Script" style="font-size:.75rem;background:var(--code-bg,#0F172A);color:#E2E8F0;border-color:#1E293B;">⌨ Code Block</button>
+                <button class="tool-btn" type="button" id="btnInsertCode" title="Blok Kode / Script" style="font-size:.75rem;background:var(--code-bg,#0F172A);color:#E2E8F0;border-color:#1E293B;">Code Block</button>
                 <span style="width:1px;height:22px;background:var(--border);display:inline-block;margin:0 2px;"></span>
 
                 {{-- Image --}}
-                <button class="tool-btn" type="button" id="btnInsertImage" title="Sisipkan Foto di Mana Saja" style="font-size:.75rem;">🖼 Gambar</button>
+                <button class="tool-btn" type="button" id="btnInsertImage" title="Sisipkan Foto di Mana Saja" style="font-size:.75rem;">Gambar</button>
 
                 {{-- Ad --}}
                 <button class="tool-btn" type="button" id="btnInsertAd" title="Sisipkan Slot Iklan" style="font-size:.75rem;background:rgba(245,158,11,.1);color:#92400E;border-color:rgba(245,158,11,.3);">$ Iklan</button>
@@ -122,12 +122,12 @@ sudo apt-get update
 
             {{-- Shortcode reference --}}
             <details style="margin-top:10px;">
-                <summary style="font-size:.76rem;font-weight:700;color:var(--text3);cursor:pointer;padding:6px 0;">Panduan shortcode yang tersedia ↓</summary>
+                <summary style="font-size:.76rem;font-weight:700;color:var(--text3);cursor:pointer;padding:6px 0;">Panduan shortcode yang tersedia</summary>
                 <div style="margin-top:8px;padding:14px;border-radius:8px;background:var(--surface2);font-size:.78rem;line-height:1.9;color:var(--text2);font-family:monospace;">
                     <strong style="font-family:inherit;">Format teks:</strong><br>
-                    **tebal** · *miring* · `kode inline` · ~~coret~~<br><br>
+                    **tebal** - *miring* - `kode inline` - ~~coret~~<br><br>
                     <strong style="font-family:inherit;">Heading:</strong><br>
-                    ## Heading 2 · ### Heading 3<br><br>
+                    ## Heading 2 - ### Heading 3<br><br>
                     <strong style="font-family:inherit;">Sisipkan gambar di mana saja:</strong><br>
                     [img: https://url-foto.com/gambar.jpg | Keterangan opsional]<br><br>
                     <strong style="font-family:inherit;">Blok kode / script:</strong><br>
@@ -135,9 +135,9 @@ sudo apt-get update
                     sudo apt-get update<br>
                     ```<br><br>
                     <strong style="font-family:inherit;">Slot iklan:</strong><br>
-                    [iklan] · [iklan: leaderboard] · [iklan: rectangle]<br><br>
+                    [iklan] - [iklan: leaderboard] - [iklan: rectangle]<br><br>
                     <strong style="font-family:inherit;">Kutipan &amp; list:</strong><br>
-                    > kutipan · - item · 1. item bernomor
+                    > kutipan - - item - 1. item bernomor
                 </div>
             </details>
         </section>
@@ -147,7 +147,7 @@ sudo apt-get update
             <div class="field full">
                 <label for="excerpt">Ringkasan / Excerpt</label>
                 <textarea id="excerpt" name="excerpt" style="min-height:90px;"
-                          placeholder="Ringkasan singkat (150–200 karakter) yang tampil di kartu berita dan hasil pencarian.">{{ old('excerpt', $post->excerpt) }}</textarea>
+                          placeholder="Ringkasan singkat (150-200 karakter) yang tampil di kartu berita dan hasil pencarian.">{{ old('excerpt', $post->excerpt) }}</textarea>
                 @error('excerpt') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
         </section>
@@ -206,7 +206,7 @@ sudo apt-get update
 
     </div>
 
-    {{-- ── Editor sidebar ──────────────────────────────────── --}}
+    {{-- â”€â”€ Editor sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ --}}
     <aside class="editor-side">
 
         {{-- Publish --}}
@@ -262,6 +262,25 @@ sudo apt-get update
                     @error('price') <span class="text-danger">{{ $message }}</span> @enderror
                 </div>
                 @endif
+                @if ($type === 'tutorial')
+                <div class="field">
+                    <label for="series_id">Seri Panduan <small style="font-weight:400;color:#888;">(opsional)</small></label>
+                    <select id="series_id" name="series_id">
+                        <option value="">- Tidak ada seri -</option>
+                        @foreach($allSeries as $s)
+                            <option value="{{ $s->id }}" {{ old('series_id', $post->series_id) == $s->id ? 'selected' : '' }}>{{ $s->title }}</option>
+                        @endforeach
+                    </select>
+                    @error('series_id') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <div class="field">
+                    <label for="series_order">Urutan dalam Seri</label>
+                    <input id="series_order" name="series_order" type="number" min="1"
+                           value="{{ old('series_order', $post->series_order) }}"
+                           placeholder="Cth: 1, 2, 3">
+                    @error('series_order') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                @endif
                 <div class="field">
                     <label for="image_url">URL Gambar Eksternal</label>
                     <input id="image_url" name="image_url" type="url"
@@ -277,7 +296,7 @@ sudo apt-get update
             <div class="panel-head">
                 <div>
                     <h2>Featured Image</h2>
-                    <p>JPG, PNG, atau WebP – maks 2MB.</p>
+                    <p>JPG, PNG, atau WebP - maks 2MB.</p>
                 </div>
             </div>
             <label class="image-preview" for="featured_image" id="imagePreview">
@@ -287,7 +306,7 @@ sudo apt-get update
                     <div style="padding:20px;font-size:.83rem;line-height:1.6;">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" style="margin:0 auto 10px;opacity:.4;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         <strong style="display:block;">Klik untuk upload</strong>
-                        <span style="color:var(--text3);">JPG, PNG, WebP · maks 2MB</span>
+                        <span style="color:var(--text3);">JPG, PNG, WebP - maks 2MB</span>
                     </div>
                 @endif
             </label>
@@ -300,7 +319,7 @@ sudo apt-get update
 </form>
 
 @isset($items)
-{{-- ── Post list ────────────────────────────────────────────── --}}
+{{-- â”€â”€ Post list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ --}}
 <section class="card panel" style="margin-top:20px;">
     <div class="panel-head">
         <div>
@@ -368,7 +387,7 @@ sudo apt-get update
                     <td colspan="{{ $type === 'jualan' ? 7 : 6 }}"
                         style="text-align:center;padding:36px;color:var(--text3);">
                         Belum ada data {{ strtolower($label) }}.
-                        <a href="{{ route('dashboard.posts.index', $type) }}" style="color:var(--brand);font-weight:700;">Tambah sekarang →</a>
+                        <a href="{{ route('dashboard.posts.index', $type) }}" style="color:var(--brand);font-weight:700;">Tambah sekarang -></a>
                     </td>
                 </tr>
                 @endforelse
@@ -394,7 +413,7 @@ sudo apt-get update
 
 @push('scripts')
 <script>
-// ── Editor helpers ───────────────────────────────────────────
+// â”€â”€ Editor helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const contentBox = document.getElementById('content');
 
 function insertAtCursor(text) {
@@ -412,7 +431,7 @@ document.querySelectorAll('[data-insert]').forEach(btn => {
     btn.addEventListener('click', () => insertAtCursor(btn.dataset.insert.replace(/\\n/g, '\n')));
 });
 
-// ── Insert Link ──────────────────────────────────────────────
+// â”€â”€ Insert Link â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 document.getElementById('btnInsertLink').addEventListener('click', () => {
     const url  = prompt('URL link:', 'https://');
     if (!url) return;
@@ -420,13 +439,13 @@ document.getElementById('btnInsertLink').addEventListener('click', () => {
     insertAtCursor(`[${text}](${url})`);
 });
 
-// ── Insert Code Block ────────────────────────────────────────
+// â”€â”€ Insert Code Block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 document.getElementById('btnInsertCode').addEventListener('click', () => {
-    const lang = prompt('Bahasa / jenis kode (bash, php, js, python, sql, text, …):', 'bash') || 'bash';
+    const lang = prompt('Bahasa / jenis kode (bash, php, js, python, sql, text, dll):', 'bash') || 'bash';
     insertAtCursor(`\n\`\`\`${lang}\n// tulis kode di sini\n\`\`\`\n`);
 });
 
-// ── Insert Image anywhere ────────────────────────────────────
+// â”€â”€ Insert Image anywhere â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 document.getElementById('btnInsertImage').addEventListener('click', () => {
     const url = prompt('URL gambar:', 'https://');
     if (!url) return;
@@ -435,13 +454,13 @@ document.getElementById('btnInsertImage').addEventListener('click', () => {
     insertAtCursor('\n' + shortcode + '\n');
 });
 
-// ── Insert Ad slot ───────────────────────────────────────────
+// â”€â”€ Insert Ad slot â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 document.getElementById('btnInsertAd').addEventListener('click', () => {
-    const type = prompt('Tipe iklan:\n banner (468×60) – default\n rectangle (300×250)\n leaderboard (728×90)', 'banner') || 'banner';
+    const type = prompt('Tipe iklan:\n banner (468x60) - default\n rectangle (300x250)\n leaderboard (728x90)', 'banner') || 'banner';
     insertAtCursor(`\n[iklan: ${type}]\n`);
 });
 
-// ── Split / editor only tabs ─────────────────────────────────
+// â”€â”€ Split / editor only tabs â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const previewPane  = document.getElementById('previewPane');
 const previewContent = document.getElementById('previewContent');
 let splitMode = false;
@@ -462,7 +481,7 @@ document.getElementById('btnSplitView').addEventListener('click', () => {
     renderPreview();
 });
 
-// ── Live preview (client-side mini-renderer) ─────────────────
+// â”€â”€ Live preview (client-side mini-renderer) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function renderPreview() {
     if (!splitMode) return;
     const raw = contentBox.value;
@@ -494,7 +513,7 @@ function clientRender(raw) {
     const ads = [];
     t = t.replace(/\[iklan(?::\s*([^\]]*))?\]/gi, (_, type) => {
         const id = `%%A${ads.length}%%`;
-        ads.push(`<div style="margin:1.5em 0;padding:16px;border:2px dashed #E2E8F0;border-radius:8px;text-align:center;color:#94A3B8;font-size:.82rem;">📢 Slot Iklan — ${type||'banner'}</div>`);
+        ads.push(`<div style="margin:1.5em 0;padding:16px;border:2px dashed #E2E8F0;border-radius:8px;text-align:center;color:#94A3B8;font-size:.82rem;">Iklan Slot Iklan - ${type||'banner'}</div>`);
         return id;
     });
 
@@ -559,14 +578,14 @@ contentBox.addEventListener('keydown', e => {
         const sel = contentBox.value.substring(contentBox.selectionStart, contentBox.selectionEnd);
         insertAtCursor(sel ? `*${sel}*` : '*teks miring*');
     }
-    // Tab → 2 spaces
+    // Tab -> 2 spaces
     if (e.key === 'Tab') {
         e.preventDefault();
         insertAtCursor('  ');
     }
 });
 
-// ── Featured image preview ───────────────────────────────────
+// â”€â”€ Featured image preview â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const imgInput   = document.getElementById('featured_image');
 const imgPreview = document.getElementById('imagePreview');
 imgInput.addEventListener('change', () => {

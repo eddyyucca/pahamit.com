@@ -1,4 +1,4 @@
-@extends('dashboard.layout', [
+﻿@extends('dashboard.layout', [
     'title' => 'Daftar ' . $label,
     'description' => 'Kelola daftar ' . strtolower($label) . ' yang sudah tersimpan.',
 ])
