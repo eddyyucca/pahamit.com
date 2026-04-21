@@ -3,6 +3,7 @@
 namespace App\Services\Ai;
 
 use App\Models\AiConversation;
+use App\Support\PublicStorageMirror;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -169,6 +170,7 @@ class GeminiImageService
         }
 
         Storage::disk('public')->put($path, $bytes);
+        PublicStorageMirror::put($path, $bytes);
 
         return $path;
     }
@@ -192,7 +194,10 @@ class GeminiImageService
         $filename = trim(Str::slug($title), '-') ?: 'ai-image';
         $path = 'ai-images/' . now()->format('Y/m') . '/' . $filename . '-' . Str::random(8) . '.svg';
 
-        Storage::disk('public')->put($path, $this->fallbackSvg($conversation, $draft));
+        $svg = $this->fallbackSvg($conversation, $draft);
+
+        Storage::disk('public')->put($path, $svg);
+        PublicStorageMirror::put($path, $svg);
 
         return $path;
     }

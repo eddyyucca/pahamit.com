@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MediaPost;
 use App\Models\Series;
+use App\Support\PublicStorageMirror;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -118,6 +119,7 @@ class MediaPostController extends Controller
 
         if ($post->image_path) {
             Storage::disk('public')->delete($post->image_path);
+            PublicStorageMirror::delete($post->image_path);
         }
 
         $post->delete();
@@ -168,9 +170,11 @@ class MediaPostController extends Controller
 
         if ($post?->image_path) {
             Storage::disk('public')->delete($post->image_path);
+            PublicStorageMirror::delete($post->image_path);
         }
 
         $data['image_path'] = $request->file('featured_image')->store('media-posts', 'public');
+        PublicStorageMirror::copyFromPublicDisk($data['image_path']);
         $data['image_url'] = null;
 
         return $data;

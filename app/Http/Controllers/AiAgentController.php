@@ -35,7 +35,7 @@ class AiAgentController extends Controller
             $conversations = collect([$conversation]);
         }
 
-        abort_unless($conversation->user_id === Auth::id(), 403);
+        abort_unless($this->ownsConversation($conversation), 403);
 
         $conversation->load([
             'messages' => fn ($query) => $query->oldest(),
@@ -80,7 +80,7 @@ class AiAgentController extends Controller
 
     public function updateConversation(Request $request, AiConversation $conversation): RedirectResponse
     {
-        abort_unless($conversation->user_id === Auth::id(), 403);
+        abort_unless($this->ownsConversation($conversation), 403);
 
         $data = $request->validate([
             'type' => ['required', 'in:berita,tutorial,jualan,general'],
@@ -97,7 +97,7 @@ class AiAgentController extends Controller
 
     public function message(Request $request, AiConversation $conversation, AiOrchestratorService $agent): RedirectResponse
     {
-        abort_unless($conversation->user_id === Auth::id(), 403);
+        abort_unless($this->ownsConversation($conversation), 403);
 
         $data = $request->validate([
             'message' => ['required', 'string', 'max:8000'],
@@ -115,7 +115,7 @@ class AiAgentController extends Controller
 
     public function saveDraft(AiConversation $conversation, AiDraft $draft, GeminiImageService $images): RedirectResponse
     {
-        abort_unless($conversation->user_id === Auth::id() && $draft->ai_conversation_id === $conversation->id, 403);
+        abort_unless($this->ownsConversation($conversation) && $this->draftBelongsToConversation($draft, $conversation), 403);
 
         if ($draft->media_post_id) {
             return redirect()
@@ -188,5 +188,15 @@ class AiAgentController extends Controller
             ->implode("\n");
 
         return $content . "\n\n## Sumber Referensi\n\n" . $sourceText;
+    }
+
+    private function ownsConversation(AiConversation $conversation): bool
+    {
+        return (string) $conversation->user_id === (string) Auth::id();
+    }
+
+    private function draftBelongsToConversation(AiDraft $draft, AiConversation $conversation): bool
+    {
+        return (string) $draft->ai_conversation_id === (string) $conversation->id;
     }
 }

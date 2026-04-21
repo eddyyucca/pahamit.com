@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Models\AiConversation;
 use App\Models\SiteVisit;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -43,5 +45,22 @@ class ProductionSurfaceTest extends TestCase
         $this->get('/', $headers)->assertOk();
 
         $this->assertSame(1, SiteVisit::count());
+    }
+
+    public function test_ai_agent_opens_when_current_user_has_existing_conversation(): void
+    {
+        $user = User::factory()->create();
+
+        AiConversation::create([
+            'user_id' => $user->id,
+            'title' => 'Percakapan Hosting',
+            'type' => 'berita',
+            'tone' => 'Santai teknis',
+        ]);
+
+        $this->actingAs($user)
+            ->get('/dashboard/ai-agent')
+            ->assertOk()
+            ->assertSee('Percakapan Hosting');
     }
 }
